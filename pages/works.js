@@ -32,7 +32,7 @@ const Posts = () => (
           <GridItem
             title="My Resume !"
             thumbnail={thumbResume}
-            href="https://docs.google.com/document/d/1fKbVC_nXCJ6ddob5jcxOTgt95ynjGZOr3grLjNiBaG0/edit?usp=sharing"
+            href="https://docs.google.com/document/d/1jN3h7MmL12K4CI8EvpddmChOS4TF5KMQlAXKkE6TO_4/edit?usp=sharing"
           />
           <GridItem
             title="Budget Buddy !"
