@@ -18,6 +18,7 @@ import Layout from '../components/layouts/article'
 import Section from '../components/section'
 import { GridItem } from '../components/grid-item'
 import { IoLogoTwitter, IoLogoInstagram, IoLogoGithub } from 'react-icons/io5'
+import { FaLinkedin } from 'react-icons/fa';
 import thumbYouTube from '../public/images/links/youtube.png'
 import thumbInkdrop from '../public/images/works/inkdrop_eyecatch.png'
 import Image from 'next/image'
@@ -154,23 +155,29 @@ const Home = () => (
               </Button>
             </Link>
           </ListItem>
-         
-       
           <ListItem>
-            <Link href="https://www.instagram.com/maxiguiilermo/" target="_blank">
+            <Link href="https://www.linkedin.com/in/maxwell-guillermo-67395520b" target="_blank">
+              <Button
+                variant="ghost"
+                colorScheme="teal"
+                leftIcon={<FaLinkedin />}
+              >
+                @maxwell-guillermo
+              </Button>
+            </Link>
+          </ListItem>          
+          <ListItem>
+            <Link href="https://www.instagram.com/maxiguillermoo/" target="_blank">
               <Button
                 variant="ghost"
                 colorScheme="teal"
                 leftIcon={<IoLogoInstagram />}
               >
-                @maxiguiilermo
+                @maxiguilermoo
               </Button>
             </Link>
           </ListItem>
         </List>
-
-
-
 
 
         <Box align="center" my={4}>

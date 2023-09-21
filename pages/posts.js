@@ -14,6 +14,7 @@ import thumb500PaidUsers from '../public/images/contents/blog-500-paid-users.jpg
 import thumbFinancialGoal from '../public/images/contents/blog-financial-goal.png'
 import thumbHowToPriceYourself from '../public/images/contents/blog-how-to-price-yourself.jpg'
 import thumb50xFaster from '../public/images/contents/youtube-50x-faster.jpg'
+import thumbComingSoon from '../public/images/contents/coming-soon-thumb.jpg'
 
 const Posts = () => (
   <Layout title="Posts">
@@ -25,23 +26,23 @@ const Posts = () => (
       <Section delay={0.1}>
         <SimpleGrid columns={[1, 2, 2]} gap={6}>
           <GridItem
-            title="!"
-            thumbnail={thumb500PaidUsers}
+            title=""
+            thumbnail={thumbComingSoon}
             href="http://localhost:3000/"
           />
           <GridItem
-            title="!"
-            thumbnail={thumb500PaidUsers}
+            title=""
+            thumbnail={thumbComingSoon}
             href="http://localhost:3000/"
           />
           <GridItem
-            title="!"
-            thumbnail={thumb500PaidUsers}
+            title=""
+            thumbnail={thumbComingSoon}
             href="http://localhost:3000/"
           />
           <GridItem
-            title="!"
-            thumbnail={thumb500PaidUsers}
+            title=""
+            thumbnail={thumbComingSoon}
             href="http://localhost:3000/"
           />
         </SimpleGrid>
