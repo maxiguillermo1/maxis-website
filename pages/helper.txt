@@ -1,0 +1,5 @@
+import covidsimulation from '.../public/images/contents/covidsimulation-1.jpg'
+import solarsystem from '.../public/images/contents/solarsystem-1.jpg'
+import pycraft from '.../public/images/contents/pycraft-1.jpg'
+import complexcube from '.../public/images/contents/complexcube-1.jpg'
+import tictactoe from '.../public/images/contents/tictactoe-1.jpg'
