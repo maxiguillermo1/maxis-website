@@ -4,7 +4,7 @@ import NavBar from '../navbar'
 import { Box, Container } from '@chakra-ui/react'
 import Footer from '../footer'
 import VoxelDogLoader from '../voxel-dog-loader'
-
+import maxiCC from '../public/images/contents/maxi-g-thumbnail.jpg'
 
 
 const LazyVoxelDog = dynamic(() => import('../voxel-dog'), {
@@ -26,11 +26,11 @@ const Main = ({ children, router }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@astrofying" />
         <meta name="twitter:creator" content="@astrofying" />
-        <meta name="twitter:image" content="http://maxi-g.com/maxi-g-thumbnail.jpg" />
+        <meta name="twitter:image" content="maxiCC" />
         <meta property="og:site_name" content="Maxi Guillermo" />
         <meta name="og:title" content="Maxi Guillermo" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="http://maxi-g.com/maxi-g-thumbnail.jpg" />
+        <meta property="og:image" content="maxiCC" />
         <title>Maxi Guillermo - Homepage</title>
       </Head>
 
