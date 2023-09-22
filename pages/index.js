@@ -124,7 +124,7 @@ const Home = () => (
             Photography
           </Link>
 
-         , Artificial Intelligence
+         , Artificial Intelligence and Machine Learning
         </Paragraph>
       </Section>
 
@@ -183,7 +183,7 @@ const Home = () => (
         <Box align="center" my={4}>
           <Button
             as={NextLink}
-            href="https://mail.google.com/mail/?view=cm&source=mailto&to=maxiguillermo@gmail.com"
+            href="https://mail.google.com/mail/?view=cm&source=mailto&to=maxiguillermo1@gmail.com"
             scroll={false}
             leftIcon={<EmailIcon />}
             colorScheme="teal"
