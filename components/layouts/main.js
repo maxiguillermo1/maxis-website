@@ -30,7 +30,7 @@ const Main = ({ children, router }) => {
         <meta property="og:site_name" content="Maxi Guillermo" />
         <meta name="og:title" content="Maxi Guillermo" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="maxiCC" />
+        <meta property="og:image" content="maxi-g-thumbnail.jpg" />
         <title>Maxi Guillermo - Homepage</title>
       </Head>
 

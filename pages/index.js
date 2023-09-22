@@ -123,7 +123,7 @@ const Home = () => (
             Photography
           </Link>
 
-         , Artificial Intelligence and Machine Learning
+         , Artificial Intelligence, Machine Learning
         </Paragraph>
       </Section>
 
