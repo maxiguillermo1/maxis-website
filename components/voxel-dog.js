@@ -12,7 +12,9 @@ const VoxelDog = () => {
   const refContainer = useRef()
   const [loading, setLoading] = useState(true)
   const refRenderer = useRef()
-  const urlDogGLB = (process.env.NODE_ENV === 'production' ? 'https://craftzdog.global.ssl.fastly.net/homepage' : '') + '/dog.glb'
+  
+  // Updated model URL
+  const urlMozartGLB = '/models/mozart-voxel.glb';
 
   const handleWindowResize = useCallback(() => {
     const { current: renderer } = refRenderer
@@ -50,8 +52,6 @@ const VoxelDog = () => {
         20 * Math.cos(0.2 * Math.PI)
       )
 
-      // 640 -> 240
-      // 8   -> 6
       const scale = scH * 0.005 + 4.8
       const camera = new THREE.OrthographicCamera(
         -scale,
@@ -71,7 +71,8 @@ const VoxelDog = () => {
       controls.autoRotate = true
       controls.target = target
 
-      loadGLTFModel(scene, urlDogGLB, {
+      // Updated loadGLTFModel function call
+      loadGLTFModel(scene, urlMozartGLB, {
         receiveShadow: false,
         castShadow: false
       }).then(() => {
@@ -123,4 +124,4 @@ const VoxelDog = () => {
   )
 }
 
-export default VoxelDog
+export default VoxelDog;
