@@ -12,6 +12,10 @@ const VoxelDog = () => {
   const refContainer = useRef()
   const [loading, setLoading] = useState(true)
   const refRenderer = useRef()
+
+  // Add a new state variable to hold the position
+  const [modelPosition, setModelPosition] = useState({ x: 0, y: 0, z: 0 });
+  
   
   // Updated model URL
   const urlMozartGLB = '/models/mozart-voxel.glb';
@@ -47,7 +51,7 @@ const VoxelDog = () => {
 
       const target = new THREE.Vector3(-0.5, 1.2, 0)
       const initialCameraPosition = new THREE.Vector3(
-        20 * Math.sin(0.2 * Math.PI),
+        200 * Math.sin(0.2 * Math.PI),
         10,
         20 * Math.cos(0.2 * Math.PI)
       )
@@ -64,7 +68,7 @@ const VoxelDog = () => {
       camera.position.copy(initialCameraPosition)
       camera.lookAt(target)
 
-      const ambientLight = new THREE.AmbientLight(0xcccccc, 1)
+      const ambientLight = new THREE.AmbientLight(0xFFB6C1, 1)
       scene.add(ambientLight)
 
       const controls = new OrbitControls(camera, renderer.domElement)
@@ -76,6 +80,7 @@ const VoxelDog = () => {
         receiveShadow: false,
         castShadow: false
       }).then(() => {
+        
         animate()
         setLoading(false)
       })
@@ -91,7 +96,7 @@ const VoxelDog = () => {
           const p = initialCameraPosition
           const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20
 
-          camera.position.y = 10
+          camera.position.y = 40
           camera.position.x =
             p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed)
           camera.position.z =
