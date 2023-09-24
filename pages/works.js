@@ -21,7 +21,7 @@ const Posts = () => (
       <Section delay={0.1}>
         <SimpleGrid columns={[1, 2, 2]} gap={6}>
           <GridItem
-            title="My Resume !"
+            title=""
             thumbnail={thumbResume}
             href="https://docs.google.com/document/d/1jN3h7MmL12K4CI8EvpddmChOS4TF5KMQlAXKkE6TO_4/edit?usp=sharing"
           />
