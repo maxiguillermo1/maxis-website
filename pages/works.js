@@ -54,7 +54,7 @@ const Posts = () => (
           <GridItem
             title="How The Cookie Crumbles!"s
             thumbnail={thumbGS}
-            href="https://github.com/maxiguillermo1/Girl-Scout-DataBase"
+            href="https://github.com/maxiguillermo1/How-The-Cookie-Crumbles"
           />
           <GridItem
             title="Tic Tac Toe!"s

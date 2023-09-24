@@ -23,6 +23,7 @@ import { FaLinkedin, FaDiscord } from 'react-icons/fa';
 
 import Image from 'next/image'
 
+
 const ProfileImage = chakra(Image, {
   shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
 })
@@ -130,6 +131,15 @@ const Home = () => (
 
       <Section delay={0.3}>
         <Heading as="h3" variant="section-title">
+          Interests 🔬
+        </Heading>
+        <Paragraph>
+          UI/UX, SWE, Data Science, A-I, ML, Quant Trading
+        </Paragraph>
+      </Section>
+      
+      <Section delay={0.3}>
+        <Heading as="h3" variant="section-title">
           I ♥
         </Heading>
         <Paragraph>
@@ -138,7 +148,7 @@ const Home = () => (
             Photography
           </Link>
 
-         , Sports
+         , Fashion
         </Paragraph>
       </Section>
 
