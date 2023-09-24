@@ -5,8 +5,6 @@ import { Box, Container } from '@chakra-ui/react'
 import Footer from '../footer'
 import VoxelDogLoader from '../voxel-dog-loader'
 
-
-
 const LazyVoxelDog = dynamic(() => import('../voxel-dog'), {
   ssr: false,
   loading: () => <VoxelDogLoader />
@@ -19,7 +17,6 @@ const Main = ({ children, router }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Maxi's homepage" />
         <meta name="author" content="Maxi Guillermo" />
-        <meta name="author" content="Maxi" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <meta name="twitter:title" content="Maxi Guillermo" />
@@ -28,9 +25,9 @@ const Main = ({ children, router }) => {
         <meta name="twitter:creator" content="@astrofying" />
         <meta name="twitter:image" content="/images/maxi-g-thumbnail.jpg" />
         <meta property="og:site_name" content="Maxi Guillermo" />
-        <meta name="og:title" content="Maxi Guillermo" />
+        <meta property="og:title" content="Maxi Guillermo" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/maxi-g-thumbnail.jpg" />
+        <meta property="og:image" content="/images/maxi-g-thumbnail.jpg" /> {/* This line specifies the thumbnail */}
         <title>Maxi Guillermo - Homepage</title>
       </Head>
 
@@ -47,4 +44,4 @@ const Main = ({ children, router }) => {
   )
 }
 
-export default Main
+export default Main;
