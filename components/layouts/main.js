@@ -26,11 +26,11 @@ const Main = ({ children, router }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@astrofying" />
         <meta name="twitter:creator" content="@astrofying" />
-        <meta name="twitter:image" content="maxiCC" />
+        <meta name="twitter:image" content="/images/maxi-g-thumbnail.jpg" />
         <meta property="og:site_name" content="Maxi Guillermo" />
         <meta name="og:title" content="Maxi Guillermo" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="maxi-g-thumbnail.jpg" />
+        <meta property="og:image" content="/images/maxi-g-thumbnail.jpg" />
         <title>Maxi Guillermo - Homepage</title>
       </Head>
 
