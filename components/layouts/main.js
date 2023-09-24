@@ -27,7 +27,7 @@ const Main = ({ children, router }) => {
         <meta property="og:site_name" content="Maxi Guillermo" />
         <meta property="og:title" content="Maxi Guillermo" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://maxi-g.com/images/maxi-g-thumbnail.jpg" /> {/* This line specifies the thumbnail */}
+        <meta property="og:image" content="/images/maxi-g-thumbnail.jpg" /> {/* This line specifies the thumbnail */}
         <title>Maxi Guillermo - Homepage</title>
       </Head>
 
