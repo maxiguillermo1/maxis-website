@@ -18,7 +18,7 @@ const VoxelDog = () => {
   
   
   // Updated model URL
-  const urlMozartGLB = '/models/kttd.glb';
+  const urlMozartGLB = '/models/voxel_.glb';
 
   const handleWindowResize = useCallback(() => {
     const { current: renderer } = refRenderer
