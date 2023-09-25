@@ -18,7 +18,7 @@ const VoxelDog = () => {
   
   
   // Updated model URL
-  const urlMozartGLB = '/models/mozart-voxel.glb';
+  const urlMozartGLB = '/models/kttd.glb';
 
   const handleWindowResize = useCallback(() => {
     const { current: renderer } = refRenderer
@@ -68,9 +68,24 @@ const VoxelDog = () => {
       camera.position.copy(initialCameraPosition)
       camera.lookAt(target)
 
-      const ambientLight = new THREE.AmbientLight(0xFFB6C1, 1)
-      scene.add(ambientLight)
+  // Existing AmbientLight for general illumination
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1);  
+      scene.add(ambientLight);
+      const pointLight = new THREE.PointLight(0xffffff, 5, 100);  // White color, full intensity, 100 distance
+      pointLight.position.set(10, 10, 10);  // Position the light
+      scene.add(pointLight);
+      // New SpotLight for focused, directional light
+      const spotLight = new THREE.SpotLight(0xffffff, 5);  // White color, high intensity
+      spotLight.position.set(0, -10, 0);  // Position the light below the object
+      spotLight.target.position.set(0, 0, 0);  // Point the light towards the object
+      spotLight.angle = Math.PI / 6;  // Narrow the light cone
+      spotLight.distance = 50;  // Set a maximum distance for the light
+      spotLight.penumbra = 0.2;  // Soften the edge of the light cone
+      spotLight.decay = 2;  // Set the attenuation (quadratic by default)
+      scene.add(spotLight);
+      scene.add(spotLight.target);
 
+      
       const controls = new OrbitControls(camera, renderer.domElement)
       controls.autoRotate = true
       controls.target = target
