@@ -92,7 +92,7 @@ const Home = () => (
             href="/works"
             scroll={false}
             rightIcon={<ChevronRightIcon />}
-            colorScheme="teal"
+            colorScheme="blue"
           >
             My portfolio
           </Button>
@@ -161,7 +161,7 @@ const Home = () => (
                 <Link href="https://github.com/maxiguillermo1" target="_blank">
                   <Button
                     variant="ghost"
-                    colorScheme="teal"
+                    colorScheme="blue"
                     leftIcon={<IoLogoGithub />}
                   >
                     @maxiguillermo1
@@ -172,7 +172,7 @@ const Home = () => (
                 <Link href="https://www.linkedin.com/in/maxwell-guillermo-67395520b" target="_blank">
                   <Button
                     variant="ghost"
-                    colorScheme="teal"
+                    colorScheme="blue"
                     leftIcon={<FaLinkedin />}
                   >
                     @maxwell-guillermo
@@ -183,7 +183,7 @@ const Home = () => (
                 <Link href="https://www.instagram.com/maxiiiguillermo/" target="_blank">
                   <Button
                     variant="ghost"
-                    colorScheme="teal"
+                    colorScheme="blue"
                     leftIcon={<IoLogoInstagram />}
                   >
                     @maxiiiguillermo
@@ -194,7 +194,7 @@ const Home = () => (
                 <Link href="https://discord.com/users/astrofy" target="_blank">
                   <Button
                     variant="ghost"
-                    colorScheme="teal"
+                    colorScheme="blue"
                     leftIcon={<FaDiscord />}
                   >
                     @astrofy
@@ -206,7 +206,7 @@ const Home = () => (
                 <Link href="https://twitter.com/astrofying" target="_blank">
                   <Button
                     variant="ghost"
-                    colorScheme="teal"
+                    colorScheme="blue"
                     leftIcon={<IoLogoTwitter />}
                   >
                     @astrofying
@@ -221,7 +221,7 @@ const Home = () => (
                 href="https://mail.google.com/mail/?view=cm&source=mailto&to=maxiguillermo1@gmail.com"
                 scroll={false}
                 leftIcon={<EmailIcon />}
-                colorScheme="teal"
+                colorScheme="blue"
               >
                 Send me an email!
               </Button>

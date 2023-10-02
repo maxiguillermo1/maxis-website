@@ -28,7 +28,7 @@ const LinkItem = ({ href, path, target, children, ...props }) => {
       href={href}
       scroll={false}
       p={2}
-      bg={active ? 'grassTeal' : undefined}
+      bg={active ? 'pink' : undefined}
       color={active ? '#202023' : inactiveColor}
       target={target}
       {...props}
@@ -78,10 +78,10 @@ const Navbar = props => {
           mt={{ base: 4, md: 0 }}
         >
           <LinkItem href="/works" path={path}>
-            Works
+            Portfolio
           </LinkItem>
           <LinkItem href="/posts" path={path}>
-            Posts
+            Blog
           </LinkItem>
           <LinkItem href="/me" path={path}>Me</LinkItem>
           <LinkItem

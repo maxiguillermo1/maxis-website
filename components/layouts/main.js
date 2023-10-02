@@ -32,7 +32,7 @@ const Main = ({ children, router }) => {
         <meta property="og:url" content="https://maxi-g.com/" />
         <meta property="og:type" content="website" />
         
-        <title>Maxi Guillermo - Homepage</title>
+        <title>Maxwell Guillermo</title>
       </Head>
 
       <NavBar path={router.asPath} />
