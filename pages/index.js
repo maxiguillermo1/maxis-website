@@ -76,7 +76,7 @@ const Home = () => (
         </Box>
       </Box>
 
-      <Section delay={0.1}>
+      <Section delay={0.}>
         <Heading as="h3" variant="section-title">
         Seeking a Summer 2024 Internship!
         </Heading>
@@ -128,6 +128,7 @@ const Home = () => (
         </BioSection>
 
       </Section>
+
 
       <Section delay={0.3}>
         <Heading as="h3" variant="section-title">
