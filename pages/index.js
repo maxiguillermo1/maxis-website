@@ -33,8 +33,8 @@ const Home = () => (
     <Container>
       <Box
         borderRadius="lg"
-        mb={6}
-        p={3}
+        mb={10}
+        p={2.5}
         textAlign="center"
         bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
         css={{ backdropFilter: 'blur(10px)' }}
@@ -59,8 +59,8 @@ const Home = () => (
             borderColor="whiteAlpha.800"
             borderWidth={2}
             borderStyle="solid"
-            w="100px"
-            h="100px"
+            w="130px"
+            h="130px"
             display="inline-block"
             borderRadius="full"
             overflow="hidden"
@@ -69,8 +69,8 @@ const Home = () => (
               src="/images/maxi.jpg"
               alt="Profile image"
               borderRadius="full"
-              width="100"
-              height="100"
+              width="130"
+              height="130"
             />
           </Box>
         </Box>
