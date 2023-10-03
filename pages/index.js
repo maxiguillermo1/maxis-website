@@ -76,7 +76,7 @@ const Home = () => (
         </Box>
       </Box>
 
-      <Section delay={0.}>
+      <Section delay={0.1}>
         <Heading as="h3" variant="section-title">
         Seeking a Summer 2024 Internship!
         </Heading>
@@ -86,7 +86,7 @@ const Home = () => (
         develop solutions that not only solve real-world problems but also enrich our daily lives as humans.
 
         </Paragraph>
-        <Box align="center" my={4}>
+        <Box align="center" my={12}>
           <Button
             as={NextLink}
             href="/works"
@@ -100,7 +100,7 @@ const Home = () => (
 
       </Section>
 
-      <Section delay={0.1}>
+      <Section delay={0.2}>
         <Heading as="h3" variant="section-title">
           About Me
         </Heading>
@@ -113,7 +113,7 @@ const Home = () => (
       
       </Section>
 
-      <Section delay={0.2}>
+      <Section delay={0.3}>
         <Heading as="h3" variant="section-title">
           Bio
         </Heading>
@@ -130,7 +130,7 @@ const Home = () => (
       </Section>
 
 
-      <Section delay={0.3}>
+      <Section delay={0.4}>
         <Heading as="h3" variant="section-title">
           Interests 🔬
         </Heading>
@@ -139,7 +139,7 @@ const Home = () => (
         </Paragraph>
       </Section>
       
-      <Section delay={0.3}>
+      <Section delay={0.5}>
         <Heading as="h3" variant="section-title">
           I ♥
         </Heading>
@@ -153,7 +153,7 @@ const Home = () => (
         </Paragraph>
       </Section>
 
-      <Section delay={0.3}>
+      <Section delay={0.6}>
       <Heading as="h3" variant="section-title">
         On the web
             </Heading>
