@@ -43,13 +43,13 @@ const Home = () => (
       </Box>
 
       <Box display={{ md: 'flex' }}>
-        <Box flexGrow={1}>
+        <Box flexGrow={1} >
           <Heading as="h2" variant="page-title">
             Maxwell Guillermo
           </Heading>
-          <p>Aspring Software Engineer </p>
+          <p textAlign="center">Aspring Software Engineer </p>
         </Box>
-        <Box
+        <Box 
           flexShrink={0}
           mt={{ base: 4, md: 0 }}
           ml={{ md: 6 }}
