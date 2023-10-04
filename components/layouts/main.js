@@ -44,7 +44,6 @@ const Main = ({ children, router }) => {
         <LazyVoxelDog />
         <Footer />
       </Container>
-      
     </Box>
   )
 }
