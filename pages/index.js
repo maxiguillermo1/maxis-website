@@ -81,11 +81,20 @@ const Home = () => (
         Seeking a Summer 2024 Internship!
         </Heading>
         <Paragraph>
-        I believe that technology has the power to revolutionize our lives in a meaningful way.
-        As a computer scientist, I strive to be at the forefront of this change, seeking to
-        develop solutions that not only solve real-world problems but also enrich our daily lives as humans.
+        I am enthusiastic software engineer with a passion for creating captivating user experiences. My creativity 
+        and background in the world of code has equipped me with skills and mindset necessary to develope software applications that resonate with users and meet their needs effictively. 
+        
+        I am eager to connect with fellow software engineers, collaborate on innovative projects, and consistently perfect my craft. 
 
+        Motivated by the aspiration to help build software to make the world a better place, I am heavily invested in learning more about Machine Learning and Artifical Intelligence to solve these real world applications. 
+
+        As a computer scientist, I'm positioned at this crucial turning point, and I am committed to crafting solutions that address real-world challenges while enhancing our daily lives as humans.
+        
+        I believe that technology has the power to profoundly transform the lives of every single individual.
+       
+        Let's connnect and seek avenues to help make the world a better place through tech!
         </Paragraph>
+        
         <Box align="center" my={12}>
           <Button
             as={NextLink}
@@ -105,10 +114,11 @@ const Home = () => (
           About Me
         </Heading>
         <Paragraph>
-        Maxi Guillermo is a driven computer science student and a passionate full-stack developer, 
-        actively advancing his skills in programming languages and the foundational concepts of Computer Science. 
-        Inspired by a desire to build innovative software solutions, he's branching into 
-        Machine Learning and Artificial Intelligence to elevate his real-world problem-solving capabilities.
+        Currently I am full-time student studying Computer Science and a self employed full-stack developer. As much as I enjoy building, I love meeting new people and experiencing new things. My dream is to travel all parts of the globe and experience all the wonderful different cultures that are out there.
+
+        Outside the world of Computer Science, I have a strong passion for food, video-games, fashion, photography, and music.
+
+       
         </Paragraph>
       
       </Section>
@@ -132,7 +142,7 @@ const Home = () => (
 
       <Section delay={0.4}>
         <Heading as="h3" variant="section-title">
-          Interests 🔬
+          Research 🔬
         </Heading>
         <Paragraph>
           UI/UX, SWE, Data Science, A-I, ML, Quant Trading
@@ -144,7 +154,7 @@ const Home = () => (
           I ♥
         </Heading>
         <Paragraph>
-          Video Games, Music,{' '}
+          Traveling, Food, Video Games, Music,{' '}
           <Link href="https://drive.google.com/drive/folders/1Iz1wIQlNB4aXdOU74a4AjWEge-pbG_3v?usp=sharing" target="_blank">
             Photography
           </Link>
