@@ -81,18 +81,17 @@ const Home = () => (
         Seeking a Summer 2024 Internship!
         </Heading>
         <Paragraph>
-        I am enthusiastic software engineer with a passion for creating captivating user experiences. My creativity 
-        and background in the world of code has equipped me with skills and mindset necessary to develope software applications that resonate with users and meet their needs effictively. 
-        
-        I am eager to connect with fellow software engineers, collaborate on innovative projects, and consistently perfect my craft. 
+        I am an enthusiastic software engineer with a passion for creating captivating user experiences. My creativity and background in the world of code have equipped me with the skills and mindset necessary to develop software applications that resonate with users and meet their needs effectively.
 
-        Motivated by the aspiration to help build software to make the world a better place, I am heavily invested in learning more about Machine Learning and Artifical Intelligence to solve these real world applications. 
+        I am eager to connect with fellow software engineers, collaborate on innovative projects, and consistently perfect my craft.
+
+        Motivated by the aspiration to help build software that makes the world a better place, I am heavily invested in learning more about Machine Learning and Artificial Intelligence to solve real-world applications.
 
         As a computer scientist, I'm positioned at this crucial turning point, and I am committed to crafting solutions that address real-world challenges while enhancing our daily lives as humans.
-        
-        I believe that technology has the power to profoundly transform the lives of every single individual.
-       
-        Let's connnect and seek avenues to help make the world a better place through tech!
+
+        I believe that technology has the power to profoundly transform the lives of every individual.
+
+        Let's connect and seek avenues to help make the world a better place through tech!
         </Paragraph>
         
         <Box align="center" my={12}>
