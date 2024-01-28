@@ -39,7 +39,7 @@ const Home = () => (
         bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
         css={{ backdropFilter: 'blur(10px)' }}
       >
-        Hello, I&apos;m an Computer Scientist based in California!
+        Hello, I am a Computer Scientist Based in California!
       </Box>
 
       <Box display={{ md: 'flex' }}>
@@ -81,17 +81,17 @@ const Home = () => (
         Seeking a Summer 2024 Internship!
         </Heading>
         <Paragraph>
-        I am an enthusiastic software engineer with a passion for creating captivating user experiences. My creativity and background in the world of code have equipped me with the skills and mindset necessary to develop software applications that resonate with users and meet their needs effectively.
+       
+        I am an enthusiastic software engineer with a passion for creating captivating user experiences. My early passion to video games opened my curiosity to programming languages and how building code impacts users' experiences. My creativity and background in the world of code have equipped me with the skills and mindset necessary to develop software applications that resonate with users and meet their needs effectively.
 
-        I am eager to connect with fellow software engineers, collaborate on innovative projects, and consistently perfect my craft.
 
-        Motivated by the aspiration to help build software that makes the world a better place, I am heavily invested in learning more about Machine Learning and Artificial Intelligence to solve real-world applications.
 
-        As a computer scientist, I'm positioned at this crucial turning point, and I am committed to crafting solutions that address real-world challenges while enhancing our daily lives as humans.
+        Motivated by the aspiration to help build software that makes the world a better place, I am heavily invested in the future of Machine Learning and Artificial Intelligence and how this new paradigm can help solve olve real-world problems. 
 
-        I believe that technology has the power to profoundly transform the lives of every individual.
+        As a computer scientist, I'm positioned at this crucial turning point, and I am committed to crafting solutions that address real-world challenges while enhancing our daily lives as humans. I believe that technology has the power to profoundly transform the lives of every individual. 
 
-        Let's connect and seek avenues to help make the world a better place through tech!
+        Let's connect and seek avenues to help make the world a better place through code!
+
         </Paragraph>
         
         <Box align="center" my={12}>
@@ -113,9 +113,12 @@ const Home = () => (
           About Me
         </Heading>
         <Paragraph>
-        Currently I am full-time student studying Computer Science and a self employed full-stack developer. As much as I enjoy building, I love meeting new people and experiencing new things. My dream is to travel all parts of the globe and experience all the wonderful different cultures that are out there.
+        I am currently a full-time student at California State University, Long Beach pursuing a degree in Computer Science. Concurrently, I am a self-employed full-stack developer. 
 
-        Outside the world of Computer Science, I have a strong passion for food, video-games, fashion, photography, and music.
+        As much as I enjoy building, I love meeting new people and experiencing new things.
+
+        My dream is to travel around the world and gain a deeper understanding of different cultures and lifestyles. Outside the world of Computer Science, I have a strong passion for food, video-games, fashion, photography, and music.
+
 
        
         </Paragraph>
@@ -212,17 +215,7 @@ const Home = () => (
                 </Link>
               </ListItem>
 
-              <ListItem>
-                <Link href="https://twitter.com/astrofying" target="_blank">
-                  <Button
-                    variant="ghost"
-                    colorScheme="blue"
-                    leftIcon={<IoLogoTwitter />}
-                  >
-                    @astrofying
-                  </Button>
-                </Link>
-              </ListItem>
+          
             </List>
 
             <Box align="center" my={4}>
