@@ -77,25 +77,15 @@ const Navbar = props => {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
+          <LinkItem href="/me" path={path}>About Me</LinkItem>
           <LinkItem href="/works" path={path}>
             Portfolio
           </LinkItem>
           <LinkItem href="/posts" path={path}>
             Blog
           </LinkItem>
-          <LinkItem href="/me" path={path}>Me</LinkItem>
-          <LinkItem
-            target="_blank"
-            href="https://github.com/maxiguillermo1/maxis-website"
-            path={path}
-            display="inline-flex"
-            alignItems="center"
-            style={{ gap: 4 }}
-            pl={2}
-          >
-            <IoLogoGithub />
-            Source
-          </LinkItem>
+          
+          
         </Stack>
 
         <Box flex={1} align="right">
