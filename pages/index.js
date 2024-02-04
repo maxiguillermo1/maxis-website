@@ -39,7 +39,7 @@ const Home = () => (
         bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
         css={{ backdropFilter: 'blur(10px)' }}
       >
-        Hello, II am a Computer Scientist Based in California!
+        Hello, I am a Computer Scientist Based in California!
       </Box>
 
       <Box display={{ md: 'flex' }}>
@@ -86,7 +86,7 @@ const Home = () => (
 
 
 
-        Motivated by the aspiration to help build software that makes the world a better place, I am heavily invested in the future of Machine Learning and Artificial Intelligence and how this new paradigm can help solve olve real-world problems. 
+        Motivated by the aspiration to help build software that makes the world a better place, I am heavily invested in the future of Machine Learning and Artificial Intelligence and how this new paradigm can help solve real-world problems. 
 
         As a computer scientist, I'm positioned at this crucial turning point, and I am committed to crafting solutions that address real-world challenges while enhancing our daily lives as humans. I believe that technology has the power to profoundly transform the lives of every individual. 
 
