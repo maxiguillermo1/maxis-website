@@ -22,217 +22,153 @@ import { FaLinkedin, FaDiscord } from 'react-icons/fa';
 
 
 import Image from 'next/image'
+import { useState } from 'react';
 
+// Define the list of photo URLs
+const photos = [
+  '/images/favphotos/1.jpg',
+  '/images/favphotos/2.jpg',
+  '/images/favphotos/3.jpg',
+  '/images/favphotos/4.jpg',
+  '/images/favphotos/5.jpg',
+  '/images/favphotos/6.jpg',
+  '/images/favphotos/7.jpg',
+  '/images/favphotos/8.jpg',
+  '/images/favphotos/9.jpg',
+  '/images/favphotos/10.jpg',
+  '/images/favphotos/11.jpg',
+  '/images/favphotos/12.jpg',
+  '/images/favphotos/13.jpg',
+  '/images/favphotos/14.jpg',
+  '/images/favphotos/15.jpg',
+  '/images/favphotos/16.jpg',
+  '/images/favphotos/17.jpg',
+  '/images/favphotos/18.jpg',
+  '/images/favphotos/19.jpg',
+  '/images/favphotos/20.jpg',
+  '/images/favphotos/21.jpg',
+  '/images/favphotos/22.jpg',
+  '/images/favphotos/23.jpg',
+  '/images/favphotos/24.jpg',
+  '/images/favphotos/25.jpg',
+];
+
+const shuffleArray = (array) => {
+  let shuffledArray = array.slice();
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
 
 const ProfileImage = chakra(Image, {
   shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
 })
 
-const Home = () => (
-  <Layout>
-    <Container>
-      <Box
-        borderRadius="lg"
-        mb={10}
-        p={2.5}
-        textAlign="center"
-        bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
-        css={{ backdropFilter: 'blur(10px)' }}
-      >
-        Hello, I am a Computer Scientist Based in California!
-      </Box>
+const Home = () => {
+  const [shuffledPhotos, setShuffledPhotos] = useState(shuffleArray(photos));
 
-      <Box display={{ md: 'flex' }}>
-        <Box flexGrow={1} >
-          <Heading as="h2" variant="page-title">
-            Maxwell Guillermo
-          </Heading>
-          <p textAlign="center">Aspring SWE </p>
-        </Box>
-        <Box 
-          flexShrink={0}
-          mt={{ base: 4, md: 0 }}
-          ml={{ md: 6 }}
+  return (
+    <Layout>
+      <Container>
+        <Box
+          borderRadius="lg"
+          mb={10}
+          p={2.5}
           textAlign="center"
+          bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
+          css={{ backdropFilter: 'blur(10px)' }}
         >
+          Hello, I am a Computer Scientist Based in California!
+        </Box>
+
+        <Box display={{ md: 'flex' }}>
+          <Box flexGrow={1}>
+            <Heading as="h2" variant="page-title">
+              Maxwell Guillermo
+            </Heading>
+            <p textAlign="center">
+              An aspiring software engineer and a passionate product designer, transforming problems into fun and approachable solutions for all.
+            </p>
+          </Box>
+
           <Box
-            borderColor="whiteAlpha.800"
-            borderWidth={2}
-            borderStyle="solid"
-            w="130px"
-            h="130px"
-            display="inline-block"
-            borderRadius="full"
-            overflow="hidden"
+            flexShrink={0}
+            mt={{ base: 4, md: 0 }}
+            ml={{ md: 6 }}
+            textAlign="center"
           >
-            <ProfileImage
-              src="/images/maxi.jpg"
-              alt="Profile image"
+            <Box
+              borderColor="whiteAlpha.800"
+              borderWidth={4}
+              borderStyle="solid"
+              w="130px"
+              h="130px"
+              display="inline-block"
               borderRadius="full"
-              width="130"
-              height="130"
-            />
+              overflow="hidden"
+            >
+              <ProfileImage
+                src="/images/maxi.jpg"
+                alt="Profile image"
+                borderRadius="full"
+                width="130"
+                height="130"
+              />
+            </Box>
           </Box>
         </Box>
-      </Box>
 
-      <Section delay={0.1}>
-        <Heading as="h3" variant="section-title">
-        Seeking a Summer 2024 Internship!
-        </Heading>
-        <Paragraph>
-       
-        I am an enthusiastic software engineer with a passion for creating captivating user experiences. My early passion to video games opened my curiosity to programming languages and how building code impacts users' experiences. My creativity and background in the world of code have equipped me with the skills and mindset necessary to develop software applications that resonate with users and meet their needs effectively.
+        <div className="gallery">
+          {shuffledPhotos.map((src, index) => (
+            <div key={index} className="photo">
+              <div className="image-container">
+                <img src={src} alt={`Photo ${index + 1}`} />
+              </div>
+            </div>
+          ))}
+        </div>
 
+        <style jsx>{`
+          /* Styles for the photo gallery */
+          .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            justify-items: center;
+            padding: 16px;
+          }
 
+          /* Styles for individual photos */
+          .photo {
+            border: 1px solid transparent;
+          }
 
-        Motivated by the aspiration to help build software that makes the world a better place, I am heavily invested in the future of Machine Learning and Artificial Intelligence and how this new paradigm can help solve real-world problems. 
+          /* Styles for the image container */
+          .image-container {
+            border: 1px solid #ccc;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 100%;
+            height: auto;
+          }
 
-        As a computer scientist, I'm positioned at this crucial turning point, and I am committed to crafting solutions that address real-world challenges while enhancing our daily lives as humans. I believe that technology has the power to profoundly transform the lives of every individual. 
+          /* Styles for the image inside the container */
+          .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            border: 3px solid #ccc;
+          }
+        `}</style>
+      </Container>
+    </Layout>
+  );
+};
 
-        Let's connect and seek avenues to help make the world a better place through code!
+export default Home;
 
-        </Paragraph>
-        
-        <Box align="center" my={12}>
-          <Button
-            as={NextLink}
-            href="/works"
-            scroll={false}
-            rightIcon={<ChevronRightIcon />}
-            colorScheme="blue"
-          >
-            My portfolio
-          </Button>
-        </Box>
-
-      </Section>
-
-      <Section delay={0.2}>
-        <Heading as="h3" variant="section-title">
-          About Me
-        </Heading>
-        <Paragraph>
-        I am currently a full-time student at California State University, Long Beach pursuing a degree in Computer Science. Concurrently, I am a self-employed full-stack developer. 
-
-        As much as I enjoy building, I love meeting new people and experiencing new things.
-
-        My dream is to travel around the world and gain a deeper understanding of different cultures and lifestyles. Outside the world of Computer Science, I have a strong passion for food, video-games, fashion, photography, and music.
-
-
-       
-        </Paragraph>
-      
-      </Section>
-
-      <Section delay={0.3}>
-        <Heading as="h3" variant="section-title">
-          Bio
-        </Heading>
-        <BioSection>
-          <BioYear>2002</BioYear>
-          Born in Palo Alto (🌲), California.
-        </BioSection>
-
-        <BioSection>
-          <BioYear>2020 to 2024</BioYear>
-          Pursuing a Bachelor of Science in Computer Science @ Cal State University Long Beach.
-        </BioSection>
-
-      </Section>
-
-
-      <Section delay={0.4}>
-        <Heading as="h3" variant="section-title">
-          Research 🔬
-        </Heading>
-        <Paragraph>
-          UI/UX, SWE, Data Science, A-I, ML, Quant Trading
-        </Paragraph>
-      </Section>
-      
-      <Section delay={0.5}>
-        <Heading as="h3" variant="section-title">
-          I ♥
-        </Heading>
-        <Paragraph>
-          Traveling, Food, Video Games, Music,{' '}
-          <Link href="https://drive.google.com/drive/folders/1Iz1wIQlNB4aXdOU74a4AjWEge-pbG_3v?usp=sharing" target="_blank">
-            Photography
-          </Link>
-
-         , Fashion
-        </Paragraph>
-      </Section>
-
-      <Section delay={0.6}>
-      <Heading as="h3" variant="section-title">
-        On the web
-            </Heading>
-            <List>
-              <ListItem>
-                <Link href="https://github.com/maxiguillermo1" target="_blank">
-                  <Button
-                    variant="ghost"
-                    colorScheme="blue"
-                    leftIcon={<IoLogoGithub />}
-                  >
-                    @maxiguillermo1
-                  </Button>
-                </Link>
-              </ListItem>
-              <ListItem>
-                <Link href="https://www.linkedin.com/in/maxwell-guillermo-67395520b" target="_blank">
-                  <Button
-                    variant="ghost"
-                    colorScheme="blue"
-                    leftIcon={<FaLinkedin />}
-                  >
-                    @maxwell-guillermo
-                  </Button>
-                </Link>
-              </ListItem>
-              <ListItem>
-                <Link href="https://www.instagram.com/maxiiiguillermo/" target="_blank">
-                  <Button
-                    variant="ghost"
-                    colorScheme="blue"
-                    leftIcon={<IoLogoInstagram />}
-                  >
-                    @maxiiiguillermo
-                  </Button>
-                </Link>
-              </ListItem>
-              <ListItem>
-                <Link href="https://discord.com/users/astrofy" target="_blank">
-                  <Button
-                    variant="ghost"
-                    colorScheme="blue"
-                    leftIcon={<FaDiscord />}
-                  >
-                    @astrofy
-                  </Button>
-                </Link>
-              </ListItem>
-
-          
-            </List>
-
-            <Box align="center" my={4}>
-              <Button
-                as={NextLink}
-                href="https://mail.google.com/mail/?view=cm&source=mailto&to=maxiguillermo1@gmail.com"
-                scroll={false}
-                leftIcon={<EmailIcon />}
-                colorScheme="blue"
-              >
-                Send me an email!
-              </Button>
-            </Box>
-          </Section>
-    </Container>
-  </Layout>
-)
-
-export default Home
 export { getServerSideProps } from '../components/chakra'
+
