@@ -31,6 +31,41 @@ const ProfileImage = chakra(Image, {
 const Home = () => (
   <Layout>
     <Container>
+    <Box
+          borderRadius="lg"
+          mb={10}
+          p={2.5}
+          textAlign="center"
+          bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
+          css={{ backdropFilter: 'blur(10px)' }}
+        >
+          Hello, I am a Computer Scientist Based in California!
+        </Box>
+        <Box
+            flexShrink={0}
+            mt={{ base: 4, md: 0 }}
+            ml={{ md: 6 }}
+            textAlign="center"
+          >
+            <Box
+              borderColor="whiteAlpha.800"
+              borderWidth={4}
+              borderStyle="solid"
+              w="130px"
+              h="130px"
+              display="inline-block"
+              borderRadius="full"
+              overflow="hidden"
+            >
+              <ProfileImage
+                src="/images/maxi.jpg"
+                alt="Profile image"
+                borderRadius="full"
+                width="130"
+                height="130"
+              />
+            </Box>
+          </Box>
     
 
       <Section delay={0.1}>
