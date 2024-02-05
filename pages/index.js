@@ -121,8 +121,8 @@ const Home = () => {
 /* Adjust the positioning for each photo to create a staggered look */
 .photo-0 { top: 15%; left: 0%; width: 35%; z-index: 1; }
 .photo-1 { top: 18%; left: 35%; width: 25%; z-index: 2; }
-.photo-2 { top: 21%; left: 60%; width: 38%; z-index: 3; }
-.photo-3 { top: 24%; left: 98%; width: 35%; z-index: 4; }
+.photo-2 { top: 21%; left: 60%; width: 25%; z-index: 3; }
+.photo-3 { top: 24%; left: 85%; width: 35%; z-index: 4; }
 .photo-4 { top: 61%; left: 0%; width: 30%; z-index: 5; }
 .photo-5 { top: 64%; left: 30%; width: 25%; z-index: 6; }
 .photo-6 { top: 67%; left: 55%; width: 30%; z-index: 7; }
