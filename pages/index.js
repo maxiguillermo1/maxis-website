@@ -1,4 +1,4 @@
-import NextLink from 'next/link'
+ import NextLink from 'next/link'
 import {
   Link,
   Container,
@@ -92,49 +92,62 @@ const Home = () => {
           </Box>
         
 
-        <div className="gallery">
-          {shuffledPhotos.map((src, index) => (
-            <div key={index} className="photo">
-              <div className="image-container">
-                <img src={src} alt={`Photo ${index + 1}`} />
-              </div>
-            </div>
-          ))}
-        </div>
+          <div className="gallery">
+  {shuffledPhotos.slice(0, 8).map((src, index) => (
+    <div key={index} className={`photo photo-${index}`}>
+      <div className="image-container">
+        <img src={src} alt={`Photo ${index + 1}`} />
+      </div>
+    </div>
+  ))}
+</div>
 
-        <style jsx>{`
-          /* Styles for the photo gallery */
-          .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-            justify-items: center;
-            padding: 16px;
-          }
+<style jsx>{`
+  /* Styles for the photo gallery */
+.gallery {
+  position: relative;
+  width: 100%; /* Full width of the container */
+  height: 100vh; /* Adjust to your preference */
+  padding: 16px;
+  margin: -8px; /* Reduce the space between the images */
+}
 
-          /* Styles for individual photos */
-          .photo {
-            border: 1px solid transparent;
-          }
+/* Styles for individual photos */
+.photo {
+  position: absolute;
+  transition: transform 0.5s ease;
+}
 
-          /* Styles for the image container */
-          .image-container {
-            border: 1px solid transparent;
-            padding: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 100%;
-            height: auto;
-          }
+/* Adjust the positioning for each photo to create a staggered look */
+.photo-0 { top: 15%; left: -20%; width: 35%; z-index: 1; }
+.photo-1 { top: 18%; left: 15%; width: 40%; z-index: 2; }
+.photo-2 { top: 21%; left: 55%; width: 33.5%; z-index: 3; }
+.photo-3 { top: 24%; left: 88%; width: 35%; z-index: 4; }
+.photo-4 { top: 61%; left: 0%; width: 30%; z-index: 5; }
+.photo-5 { top: 64%; left: 30%; width: 25%; z-index: 6; }
+.photo-6 { top: 67%; left: 55%; width: 30%; z-index: 7; }
+.photo-7 { top: 70%; left: 85%; width: 20%; z-index: 8; }
 
-          /* Styles for the image inside the container */
-          .image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            border: 3px solid #ccc;
-          }
-        `}</style>
+/* Styles for the image container */
+.image-container {
+  width: 100%;
+  height: auto; /* Keep the original aspect ratio */
+  overflow: hidden; /* Clip the overflow */
+}
+
+/* Styles for the image */
+.image-container img {
+  width: 100%; /* Scale the image to fill the container */
+  height: auto;
+  display: block;
+  border: 3px solid white; /* Assuming white borders as shown in the image */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+  
+`}</style>
+
+
       </Container>
     </Layout>
   );
@@ -143,4 +156,5 @@ const Home = () => {
 export default Home;
 
 export { getServerSideProps } from '../components/chakra'
+
 
