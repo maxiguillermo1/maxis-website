@@ -137,6 +137,8 @@ const Home = () => {
     @media (max-width: 768px) {
       .gallery {
         grid-template-columns: repeat(2, 1fr); /* 2-column grid for mobile screens */
+        margin-left: 5%;
+        margin-bottom: 20%;
       }
       /* Make all photos span full width of a column */
       .photo {
