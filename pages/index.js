@@ -103,46 +103,76 @@ const Home = () => {
 </div>
 
 <style jsx>{`
-  /* Styles for the photo gallery */
+
+
+/* Base styles for the gallery */
 .gallery {
+  margin-top: 20%;
+  margin-bottom: -25%;
+  left: 10%;
   position: relative;
-  width: 100%; /* Full width of the container */
-  height: 100vh; /* Adjust to your preference */
-  padding: 16px;
-  margin: -8px; /* Reduce the space between the images */
-}
-
-/* Styles for individual photos */
-.photo {
-  position: absolute;
-  transition: transform 0.5s ease;
-}
-
-/* Adjust the positioning for each photo to create a staggered look */
-.photo-0 { top: 15%; left: 0%; width: 35%; z-index: 1; }
-.photo-1 { top: 18%; left: 35%; width: 25%; z-index: 2; }
-.photo-2 { top: 21%; left: 60%; width: 25%; z-index: 3; }
-.photo-3 { top: 24%; left: 85%; width: 35%; z-index: 4; }
-.photo-4 { top: 61%; left: 0%; width: 30%; z-index: 5; }
-.photo-5 { top: 64%; left: 30%; width: 25%; z-index: 6; }
-.photo-6 { top: 67%; left: 55%; width: 30%; z-index: 7; }
-.photo-7 { top: 70%; left: 85%; width: 20%; z-index: 8; }
-
-/* Styles for the image container */
-.image-container {
   width: 100%;
-  height: auto; /* Keep the original aspect ratio */
-  overflow: hidden; /* Clip the overflow */
+  height: auto; /* Height should adjust to content */
+  display: grid;
+  grid-template-columns: repeat(6, 15%); /* Creates a 4-column grid */
+  grid-auto-rows: minmax(100px, auto); /* Adjust row height to fit content */
+  gap: 4px; /* Spacing between photos */
 }
 
-/* Styles for the image */
-.image-container img {
-  width: 100%; /* Scale the image to fill the container */
-  height: auto;
-  display: block;
-  border: 3px solid white; /* Assuming white borders as shown in the image */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+/* Styles for photos */
+.photo {
+  position: relative;
+  transition: transform 1s ease;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
 }
+/* Adjust the grid layout to fit like puzzle pieces */
+.photo-7 { grid-column: span 2; grid-row: span 4; } /* Large block at the top-left corner */
+.photo-0 { grid-column: span 3; grid-row: span 2; } /* Large block at the top-left corner */
+.photo-1 { grid-column: span 2; grid-row: span 3; } /* Large block spanning three columns and three rows */
+.photo-2 { grid-column: 4 / 6; grid-row: 1 / 3; } /* Vertical block fitting to the side of photo-1 */
+.photo-3 { grid-column: 1 / 3; grid-row: 3 / 5; } /* Large block under photo-0 */
+.photo-4 { grid-column: 3 / 5; grid-row: 3 / 4; } /* Horizontal block next to photo-3 */
+.photo-5 { grid-column: 5 / 6; grid-row: 3 / 5; } /* Vertical block fitting to the side of photo-4 */
+.photo-6 { grid-column: 3 / 6; grid-row: 4 / 5; } /* Horizontal block fitting under photo-4 and photo-5 */
+/* Added .photo-6 for a complete puzzle fit */
+
+/* You can continue the pattern for more photos if necessary */
+
+
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(3, 50%); /* Adjust to 2-column grid for smaller screens */
+  }
+  .photo-0, .photo-1, .photo-4, .photo-5 {
+    grid-column: span 2; /* Each image takes full width on smaller screens */
+  }
+}
+
+  /* Hover effect to 'lift' the photo */
+  .photo:hover {
+    transform: scale(1.5) translateY(10px);
+    z-index: 50;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+  }
+  
+
+  /* Styles for the image container */
+  .image-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  /* Styles for the image */
+  .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 4px solid lightgrey;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+  }
+  
 
   
 `}</style>
