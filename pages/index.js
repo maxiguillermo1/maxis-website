@@ -102,72 +102,65 @@ const Home = () => {
   ))}
 </div>
 
+<Layout>
+  
+</Layout>
 <style jsx>{`
 
 
-/* Base styles for the gallery */
-.gallery {
-  margin-top: 20%;
-  margin-bottom: -25%;
-  left: 10%;
-  position: relative;
-  width: auto;
-  height: auto; /* Height should adjust to content */
-  display: grid;
-  grid-template-columns: repeat(6, 15%); /* Creates a 4-column grid */
-  grid-auto-rows: minmax(100px, auto); /* Adjust row height to fit content */
-  gap: 4px; /* Spacing between photos */
-}
-
-/* Styles for photos */
-.photo {
-  position: relative;
-  transition: transform 1s ease;
-  box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
-}
-/* Adjust the grid layout to fit like puzzle pieces */
-.photo-7 { grid-column: span 2; grid-row: span 4; } /* Large block at the top-left corner */
-.photo-0 { grid-column: span 3; grid-row: span 2; } /* Large block at the top-left corner */
-.photo-1 { grid-column: span 2; grid-row: span 3; } /* Large block spanning three columns and three rows */
-.photo-2 { grid-column: 4 / 6; grid-row: 1 / 3; } /* Vertical block fitting to the side of photo-1 */
-.photo-3 { grid-column: 1 / 3; grid-row: 3 / 5; } /* Large block under photo-0 */
-.photo-4 { grid-column: 3 / 5; grid-row: 3 / 4; } /* Horizontal block next to photo-3 */
-.photo-5 { grid-column: 5 / 6; grid-row: 3 / 5; } /* Vertical block fitting to the side of photo-4 */
-.photo-6 { grid-column: 3 / 6; grid-row: 4 / 5; } /* Horizontal block fitting under photo-4 and photo-5 */
-/* Added .photo-6 for a complete puzzle fit */
-
-/* You can continue the pattern for more photos if necessary */
-
-
-@media (max-width: 768px) {
-  .gallery {
-    grid-template-columns: repeat(3, 50%); /* Adjust to 2-column grid for smaller screens */
-  }
-  .photo-0, .photo-1, .photo-4, .photo-5 {
-    grid-column: span 2; /* Each image takes full width on smaller screens */
-  }
-}
-
-
-
-  /* Styles for the image container */
-  .image-container {
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-  }
-  
-  /* Styles for the image */
-  .image-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border: 4px solid lightgrey;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
-  }
-  
-
+    /* Base styles for the gallery */
+    .gallery {
+      margin-top: 20%;
+      margin-bottom: -25%;
+      left: 10%;
+      position: relative;
+      display: grid;
+      gap: 4px; /* Spacing between photos */
+    }
+    
+    /* Adjust the grid layout for different screen sizes */
+    @media (min-width: 769px) {
+      .gallery {
+        grid-template-columns: repeat(6, 15%); /* 6-column grid for larger screens */
+        grid-auto-rows: minmax(100px, auto); /* Adjust row height to fit content */
+      }
+      .photo-7 { grid-column: span 2; grid-row: span 4; }
+      .photo-0 { grid-column: span 3; grid-row: span 2; }
+      .photo-1 { grid-column: span 2; grid-row: span 3; }
+      .photo-2 { grid-column: 4 / 6; grid-row: 1 / 3; }
+      .photo-3 { grid-column: 1 / 3; grid-row: 3 / 5; }
+      .photo-4 { grid-column: 3 / 5; grid-row: 3 / 4; }
+      .photo-5 { grid-column: 5 / 6; grid-row: 3 / 5; }
+      .photo-6 { grid-column: 3 / 6; grid-row: 4 / 5; }
+    }
+    
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2-column grid for mobile screens */
+      }
+      /* Make all photos span full width of a column */
+      .photo {
+        grid-column: span 1;
+      }
+    }
+    
+    .image-container {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+    }
+    
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 4px solid lightgrey;
+      box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+    }
+    
+      
+  </style>
   
 `}</style>
 
