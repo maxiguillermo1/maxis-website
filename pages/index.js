@@ -111,7 +111,7 @@ const Home = () => {
   margin-bottom: -25%;
   left: 10%;
   position: relative;
-  width: 100%;
+  width: auto;
   height: auto; /* Height should adjust to content */
   display: grid;
   grid-template-columns: repeat(6, 15%); /* Creates a 4-column grid */
@@ -148,13 +148,7 @@ const Home = () => {
   }
 }
 
-  /* Hover effect to 'lift' the photo */
-  .photo:hover {
-    transform: scale(1.5) translateY(10px);
-    z-index: 50;
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
-  }
-  
+
 
   /* Styles for the image container */
   .image-container {
