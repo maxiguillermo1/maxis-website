@@ -86,6 +86,19 @@ const Navbar = props => {
           <LinkItem href="/posts" path={path}>
             Blog
           </LinkItem>
+          <LinkItem
+            target="_blank"
+            href="https://github.com/maxiguillermo1/maxis-website"
+            path={path}
+            display="inline-flex"
+            alignItems="center"
+            style={{ gap: 4 }}
+            pl={2}
+          >
+            <IoLogoGithub />
+            Source
+          </LinkItem>
+
           
           
         </Stack>
