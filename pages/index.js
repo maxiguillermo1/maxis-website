@@ -55,6 +55,7 @@ const photos = [
   '/images/favphotos/27.jpg',
   '/images/favphotos/28.jpg',
   '/images/favphotos/29.jpg',
+  '/images/favphotos/30.jpg',
 ];
 
 const shuffleArray = (array) => {
