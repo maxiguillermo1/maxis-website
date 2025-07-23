@@ -152,9 +152,14 @@ const courseworkGroups = [
 
 const Works = () => (
   <Layout title="Portfolio">
+    
     <Container maxW="container.md" py={8}>
       {/* Resume Preview Section */}
+
       <Section delay={0.05}>
+      <Heading as="h1" variant="section-title">
+          Resume
+        </Heading>
         <Box display="flex" flexDirection="column" alignItems="center" mb={12}>
           <Box
             borderRadius="xl"
@@ -170,6 +175,7 @@ const Works = () => (
             justifyContent="center"
             p={2}
           >
+            
             <iframe
               src="https://docs.google.com/document/d/1jN3h7MmL12K4CI8EvpddmChOS4TF5KMQlAXKkE6TO_4/preview"
               title="Resume Preview"
@@ -197,7 +203,7 @@ const Works = () => (
 
       {/* Projects Section */}
       <Section delay={0.1}>
-        <Heading as="h3" size="md" mb={6} textAlign="center">
+      <Heading as="h2" variant="section-title">
           Projects
         </Heading>
         <SimpleGrid columns={[1, 2, 3]} gap={8} mb={12}>
@@ -215,13 +221,11 @@ const Works = () => (
       {/* Skills Section */}
       <Section delay={0.15}>
         <Box mb={2}>
-          <Text fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')} fontWeight="medium" letterSpacing="wide">
-            Services
-          </Text>
-          <Heading as="h2" size="xl" color={useColorModeValue('grassTeal', 'skyBlue')} fontWeight="bold" mb={1}>
-            Skill-Set
-          </Heading>
-          <Box w={12} h={1} bg={useColorModeValue('grassTeal', 'skyBlue')} borderRadius="full" mb={8} />
+          
+          <Heading as="h3" variant="section-title">
+          Skill-Set
+        </Heading>
+          
         </Box>
         <SimpleGrid columns={[1, 1, 3]} spacing={8}>
           {skillCards.map(card => (
@@ -249,7 +253,7 @@ const Works = () => (
 
       {/* Coursework Section */}
       <Section delay={0.2}>
-        <Heading as="h3" size="md" mb={4} textAlign="center">
+      <Heading as="h4" variant="section-title">
           Relevant Coursework
         </Heading>
         <Box maxW="500px" mx="auto" fontSize="md" opacity={0.9}>
