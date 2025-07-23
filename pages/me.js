@@ -69,21 +69,16 @@ const Home = () => (
     
 
       <Section delay={0.1}>
-        <Heading as="h3" variant="section-title">
-        Seeking a Summer 2024 Internship!
+        <Heading as="h3" variant="section-title" fontSize="smg">
+        Seeking entry-level roles in Software Engineering, IT, or Cybersecurity.
         </Heading>
         <Paragraph>
        
-        I am an enthusiastic software engineer with a passion for creating captivating user experiences. My early passion to video games opened my curiosity to programming languages and how building code impacts users' experiences. My creativity and background in the world of code have equipped me with the skills and mindset necessary to develop software applications that resonate with users and meet their needs effectively.
+        I am an aspiring software engineer passionate about building thoughtful, user-centered experiences that blend creativity with impact. What started as a love for video games became a deep curiosity about how technology can shape people’s lives.
 
+With a foundation in full-stack development, machine learning, and cybersecurity, I specialize in creating scalable, real-world solutions. I'm especially excited about the future of AI and how it can be used to solve meaningful challenges.
 
-
-        Motivated by the aspiration to help build software that makes the world a better place, I am heavily invested in the future of Machine Learning and Artificial Intelligence and how this new paradigm can help solve real-world problems. 
-
-        As a computer scientist, I'm positioned at this crucial turning point, and I am committed to crafting solutions that address real-world challenges while enhancing our daily lives as humans. I believe that technology has the power to profoundly transform the lives of every individual. 
-
-        Let's connect and seek avenues to help make the world a better place through code!
-
+I’m eager to join a team where I can learn, contribute, and help create products that matter.
         </Paragraph>
         
         <Box align="center" my={12}>
@@ -105,11 +100,9 @@ const Home = () => (
           About Me
         </Heading>
         <Paragraph>
-        I am currently a full-time student at California State University, Long Beach pursuing a degree in Computer Science. Concurrently, I am a self-employed full-stack developer. 
+        I recently earned my B.S. in Computer Science with a minor in Cybersecurity from California State University, Long Beach, while working independently as a full-stack developer.
 
-        As much as I enjoy building, I love meeting new people and experiencing new things.
-
-        My dream is to travel around the world and gain a deeper understanding of different cultures and lifestyles. Outside the world of Computer Science, I have a strong passion for food, video-games, fashion, photography, and music.
+Outside of tech, I’m passionate about exploring different cultures, cuisines, and creative outlets—from photography and fashion to music and gaming. My dream is to travel the world, gain new perspectives, and bring that inspiration into the software I build.
 
 
        
@@ -128,7 +121,7 @@ const Home = () => (
 
         <BioSection>
           <BioYear>2020 to 2024</BioYear>
-          Pursuing a Bachelor of Science in Computer Science @ Cal State University Long Beach.
+          B.S. in Computer Science, Minor in Cybersecurity — CSU Long Beach
         </BioSection>
 
       </Section>
@@ -139,7 +132,7 @@ const Home = () => (
           Research 🔬
         </Heading>
         <Paragraph>
-          UI/UX, SWE, Data Science, A-I, ML, Quant Trading
+          UI/UX, SWE, Data Science, A-I, ML, Quant Trading, Blockchain
         </Paragraph>
       </Section>
       
@@ -184,17 +177,7 @@ const Home = () => (
                   </Button>
                 </Link>
               </ListItem>
-              <ListItem>
-                <Link href="https://www.instagram.com/maxiiiguillermo/" target="_blank">
-                  <Button
-                    variant="ghost"
-                    colorScheme="blue"
-                    leftIcon={<IoLogoInstagram />}
-                  >
-                    @maxiiiguillermo
-                  </Button>
-                </Link>
-              </ListItem>
+              
               <ListItem>
                 <Link href="https://discord.com/users/astrofy" target="_blank">
                   <Button
