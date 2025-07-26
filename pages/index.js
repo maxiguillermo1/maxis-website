@@ -153,15 +153,7 @@ const Home = () => {
       overflow: hidden;
     }
     
-    .image-container img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border: 4px solid lightgrey;
-      box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-    }
-    
+
       
   </style>
   
