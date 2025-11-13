@@ -11,8 +11,11 @@ const LazyVoxelDog = dynamic(() => import('../voxel-dog'), {
 })
 
 const Main = ({ children, router }) => {
+  const isIndexPage = router.asPath === '/'
+  const isMinimalPage = router.asPath === '/' || router.asPath === '/writings' || router.asPath === '/photography'
+  
   return (
-    <Box as="main" pb={8}>
+    <Box as="main" pb={8} bg={isMinimalPage ? 'white' : undefined}>
       <Head>
         
         
@@ -35,14 +38,14 @@ const Main = ({ children, router }) => {
         <title>Maxwell Guillermo</title>
       </Head>
 
-      <NavBar path={router.asPath} />
+      {!isMinimalPage && <NavBar path={router.asPath} />}
 
-      <Container maxW="container.md" pt={125}>
+      <Container maxW={isMinimalPage ? '100%' : 'container.md'} pt={isMinimalPage ? 0 : 125} px={isMinimalPage ? 0 : undefined}>
         
 
         {children}
-        <LazyVoxelDog />
-        <Footer />
+        {!isMinimalPage && <LazyVoxelDog />}
+        {!isMinimalPage && <Footer />}
       </Container>
     </Box>
   )

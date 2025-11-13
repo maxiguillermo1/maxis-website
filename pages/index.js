@@ -1,172 +1,162 @@
- import NextLink from 'next/link'
+import NextLink from 'next/link'
+import Head from 'next/head'
 import {
-  Link,
+  Box,
   Container,
   Heading,
-  Box,
-  SimpleGrid,
-  Button,
-  List,
-  ListItem,
-  useColorModeValue,
-  chakra
+  Text,
+  Link,
+  VStack,
+  HStack
 } from '@chakra-ui/react'
-import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
-import Paragraph from '../components/paragraph'
-import { BioSection, BioYear } from '../components/bio'
-import Layout from '../components/layouts/article'
-import Section from '../components/section'
-import { GridItem } from '../components/grid-item'
-import { IoLogoTwitter, IoLogoInstagram, IoLogoGithub } from 'react-icons/io5';
-import { FaLinkedin, FaDiscord } from 'react-icons/fa';
-
-
-import Image from 'next/image'
-import { useState } from 'react';
-
-// Define the list of photo URLs
-const photos = [
-  '/images/favphotos/1.jpg',
-  '/images/favphotos/2.jpg',
-  '/images/favphotos/3.jpg',
-  '/images/favphotos/4.jpg',
-  '/images/favphotos/5.jpg',
-  '/images/favphotos/6.jpg',
-  '/images/favphotos/7.jpg',
-  '/images/favphotos/8.jpg',
-  '/images/favphotos/9.jpg',
-  '/images/favphotos/10.jpg',
-  '/images/favphotos/11.jpg',
-  '/images/favphotos/12.jpg',
-  '/images/favphotos/13.jpg',
-  '/images/favphotos/14.jpg',
-  '/images/favphotos/15.jpg',
-  '/images/favphotos/16.jpg',
-  '/images/favphotos/17.jpg',
-  '/images/favphotos/18.jpg',
-  '/images/favphotos/19.jpg',
-  '/images/favphotos/20.jpg',
-  '/images/favphotos/21.jpg',
-  '/images/favphotos/22.jpg',
-  '/images/favphotos/23.jpg',
-  '/images/favphotos/24.jpg',
-  '/images/favphotos/25.jpg',
-  '/images/favphotos/26.jpg',
-  '/images/favphotos/27.jpg',
-  '/images/favphotos/28.jpg',
-  '/images/favphotos/29.jpg',
-  '/images/favphotos/30.jpg',
-];
-
-const shuffleArray = (array) => {
-  let shuffledArray = array.slice();
-  for (let i = shuffledArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-  }
-  return shuffledArray;
-};
-
-const ProfileImage = chakra(Image, {
-  shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop)
-})
 
 const Home = () => {
-  const [shuffledPhotos, setShuffledPhotos] = useState(shuffleArray(photos));
-
   return (
-    <Layout>
-      <Container>
-        
-
-        <Box display={{ md: 'flex' }}>
-          <Box flexGrow={1}>
-            <Heading as="h2" variant="page-title">
-              Maxwell Guillermo 
+    <>
+      <Head>
+        <title>Maxwell Guillermo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Maxwell Guillermo - Software engineer and product designer" />
+      </Head>
+      <Box
+        minH="100vh"
+        w="100%"
+        bg="white"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        position="absolute"
+        top={0}
+        left={0}
+      >
+        <Container maxW="container.md" px={{ base: 6, md: 8 }} py={20}>
+          <VStack spacing={6} align="flex-start" maxW="700px">
+            <Heading
+              as="h1"
+              fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+              fontWeight="700"
+              color="black"
+              lineHeight="1.2"
+              fontFamily="serif"
+            >
+              Maxwell Guillermo
             </Heading>
-            <p textAlign="center">
-              An aspiring software engineer and a passionate product designer, transforming problems into fun and approachable solutions for all.
-            </p>
-          </Box>
 
-          
-          </Box>
-        
+            <HStack
+              spacing={2}
+              fontSize={{ base: 'sm', md: 'md' }}
+              color="blue.600"
+              fontFamily="sans-serif"
+              flexWrap="wrap"
+            >
+              <Link
+                href="https://github.com/maxiguillermo1"
+                target="_blank"
+                textDecoration="none"
+                color="blue.600"
+                _hover={{ textDecoration: 'underline' }}
+              >
+                github
+              </Link>
+              <Text as="span" color="black">|</Text>
+              <Link
+                as={NextLink}
+                href="/writings"
+                textDecoration="none"
+                color="blue.600"
+                _hover={{ textDecoration: 'underline' }}
+              >
+                writing
+              </Link>
+              <Text as="span" color="black">|</Text>
+              <Link
+                as={NextLink}
+                href="/photography"
+                textDecoration="none"
+                color="blue.600"
+                _hover={{ textDecoration: 'underline' }}
+              >
+                photography
+              </Link>
+              <Text as="span" color="black">|</Text>
+              <Link
+                as={NextLink}
+                href="/legacy"
+                textDecoration="none"
+                color="blue.600"
+                _hover={{ textDecoration: 'underline' }}
+              >
+                legacy website
+              </Link>
+            </HStack>
 
-          <div className="gallery">
-  {shuffledPhotos.slice(0, 8).map((src, index) => (
-    <div key={index} className={`photo photo-${index}`}>
-      <div className="image-container">
-        <img src={src} alt={`Photo ${index + 1}`} />
-      </div>
-    </div>
-  ))}
-</div>
+            <Text
+              fontSize={{ base: 'md', md: 'lg' }}
+              color="black"
+              lineHeight="1.6"
+            >
+              I'm an aspiring software engineer and product designer, transforming problems into fun and approachable solutions for all.
+            </Text>
 
-<Layout>
-  
-</Layout>
-<style jsx>{`
+            <Text
+              fontSize={{ base: 'md', md: 'lg' }}
+              color="black"
+              lineHeight="1.6"
+            >
+              I'm building{' '}
+              <Link
+                href="#"
+                textDecoration="underline"
+                color="blue.600"
+                fontFamily="sans-serif"
+                _hover={{ opacity: 0.7 }}
+              >
+                Melody
+              </Link>
+              . An app to connect people through music.
+            </Text>
 
+            <Text
+              fontSize={{ base: 'md', md: 'lg' }}
+              color="black"
+              lineHeight="1.6"
+            >
+              In the past, I've enjoyed working on full-stack web applications, machine learning projects, cybersecurity research, and building user-centered experiences. I studied Computer Science with a minor in Cybersecurity at California State University, Long Beach.
+            </Text>
 
-    /* Base styles for the gallery */
-    .gallery {
-      margin-top: 20%;
-      margin-bottom: -25%;
-      left: 10%;
-      position: relative;
-      display: grid;
-      gap: 4px; /* Spacing between photos */
-    }
-    
-    /* Adjust the grid layout for different screen sizes */
-    @media (min-width: 769px) {
-      .gallery {
-        grid-template-columns: repeat(6, 15%); /* 6-column grid for larger screens */
-        grid-auto-rows: minmax(100px, auto); /* Adjust row height to fit content */
-      }
-      .photo-7 { grid-column: span 2; grid-row: span 4; }
-      .photo-0 { grid-column: span 3; grid-row: span 2; }
-      .photo-1 { grid-column: span 2; grid-row: span 3; }
-      .photo-2 { grid-column: 4 / 6; grid-row: 1 / 3; }
-      .photo-3 { grid-column: 1 / 3; grid-row: 3 / 5; }
-      .photo-4 { grid-column: 3 / 5; grid-row: 3 / 4; }
-      .photo-5 { grid-column: 5 / 6; grid-row: 3 / 5; }
-      .photo-6 { grid-column: 3 / 6; grid-row: 4 / 5; }
-    }
-    
-    @media (max-width: 768px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr); /* 2-column grid for mobile screens */
-        margin-right: 20%;
-        margin-bottom: 20%;
-      }
-      /* Make all photos span full width of a column */
-      .photo {
-        grid-column: span 1;
-      }
-    }
-    
-    .image-container {
-      width: 100%;
-      height: auto;
-      overflow: hidden;
-    }
-    
+            <Text
+              fontSize={{ base: 'md', md: 'lg' }}
+              color="black"
+              lineHeight="1.6"
+            >
+              Connect with me on{' '}
+              <Link
+                href="https://www.linkedin.com/in/maxwell-guillermo-67395520b"
+                target="_blank"
+                textDecoration="underline"
+                color="black"
+                _hover={{ opacity: 0.7 }}
+              >
+                linkedin
+              </Link>
+              {' '}or at{' '}
+              <Link
+                href="mailto:maxiguillermo1@gmail.com"
+                textDecoration="underline"
+                color="black"
+                _hover={{ opacity: 0.7 }}
+              >
+                maxiguillermo1 at gmail dot com
+              </Link>
+              .
+            </Text>
+          </VStack>
+        </Container>
+      </Box>
+    </>
+  )
+}
 
-      
-  </style>
-  
-`}</style>
-
-
-      </Container>
-    </Layout>
-  );
-};
-
-export default Home;
+export default Home
 
 export { getServerSideProps } from '../components/chakra'
-
-
