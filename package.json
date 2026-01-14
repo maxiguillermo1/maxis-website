@@ -22,7 +22,7 @@
     "@emotion/styled": "^11.10.5",
     "framer-motion": "^8.4.0",
     "next": "^13.1.1",
-    "reac": "^0.0.0",  
+    "reac": "^0.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
@@ -31,8 +31,10 @@
   "devDependencies": {
     "eslint": "^8.31.0",
     "eslint-config-next": "^13.3.1",
+    "fast-glob": "^3.3.3",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.8.8",
-    "gh-pages": "^3.2.3"   
+    "sharp": "^0.34.5"
   },
   "main": "next.config.js",
   "engines": {

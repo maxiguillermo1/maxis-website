@@ -1,12 +1,9 @@
 import { useState, useRef, useEffect, useMemo } from 'react'
 import NextLink from 'next/link'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Box, Container, Heading, Text, Link, VStack } from '@chakra-ui/react'
 
 const Gallery = () => {
-
-  
   const categories = useMemo(
     () => ({
       me: [
@@ -176,12 +173,7 @@ const Gallery = () => {
         '/images/nature/nature30.jpeg',
         '/images/nature/nature31.jpeg',
         '/images/nature/nature32.jpeg'
-
-      ],
-
-
-
-      // pro removed
+      ]
     }),
     []
   )
@@ -191,19 +183,14 @@ const Gallery = () => {
   const total = photos.length
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [isDragging, setIsDragging] = useState(false)
-  const [slideDirection, setSlideDirection] = useState(null) // 'prev' | 'next' | 'reset' | null
 
   const containerRef = useRef(null)
-  const transitionTimeoutRef = useRef(null)
-  const isAnimatingRef = useRef(false)
+  const trackRef = useRef(null)
   const [containerWidth, setContainerWidth] = useState(0)
 
-  const startXRef = useRef(null)
-  const lastXRef = useRef(null)
-  const lastTimeRef = useRef(null)
-  const pendingDirectionRef = useRef(null)
+  const isAnimatingRef = useRef(false)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const slideDirRef = useRef(null) // 'prev' | 'next' | null
 
   // Measure container width
   useEffect(() => {
@@ -218,158 +205,146 @@ const Gallery = () => {
   const panelWidthPx = containerWidth > 0 ? containerWidth / 3 : 0
   const baseOffsetPx = panelWidthPx ? -panelWidthPx : 0
 
-  const [translatePx, setTranslatePx] = useState(0)
+  const applyTransform = (px, withTransition) => {
+    const el = trackRef.current
+    if (!el) return
+    el.style.transition = withTransition ? 'transform 0.32s cubic-bezier(0.22, 1, 0.36, 1)' : 'none'
+    el.style.transform = `translate3d(${px}px, 0, 0)`
+  }
 
-  // Snap to base offset when width changes
+  // snap to base offset when width changes
   useEffect(() => {
-    setTranslatePx(baseOffsetPx)
+    applyTransform(baseOffsetPx, false)
   }, [baseOffsetPx])
 
+  // reset on category change
   useEffect(() => {
-    // Reset carousel state when switching categories
     setCurrentIndex(0)
-    setIsAnimating(false)
-    setSlideDirection(null)
-    setTranslatePx(baseOffsetPx)
     isAnimatingRef.current = false
-    pendingDirectionRef.current = null
+    setIsAnimating(false)
+    slideDirRef.current = null
+    applyTransform(baseOffsetPx, false)
   }, [activeCategory, baseOffsetPx])
 
+  // Helpers for indices (5-panel strip)
   const safeTotal = total || 1
   const prev2Index = (currentIndex - 2 + safeTotal) % safeTotal
   const prevIndex = (currentIndex - 1 + safeTotal) % safeTotal
   const nextIndex = (currentIndex + 1) % safeTotal
   const next2Index = (currentIndex + 2) % safeTotal
-  const currentSrc = photos[currentIndex]
-  const prevSrc = photos[prevIndex]
-  const nextSrc = photos[nextIndex]
 
-  const commit = direction => {
+  // --- Peak smoothness: preload+decode before animation ---
+  const decodeImage = (src) =>
+    new Promise((resolve) => {
+      if (!src) return resolve()
+      const img = new window.Image()
+      img.decoding = 'async'
+      img.src = src
+      // If already cached, decode resolves quickly
+      const done = () => resolve()
+      if (img.decode) {
+        img.decode().then(done).catch(done)
+      } else {
+        img.onload = done
+        img.onerror = done
+      }
+    })
+
+  // Pre-decode neighbors whenever index/category changes (keeps things warm)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!total) return
+
+    const srcs = [
+      photos[currentIndex],
+      photos[prevIndex],
+      photos[nextIndex],
+      photos[prev2Index],
+      photos[next2Index]
+    ].filter(Boolean)
+
+    // fire and forget
+    srcs.forEach((s) => {
+      const img = new window.Image()
+      img.decoding = 'async'
+      img.src = s
+      if (img.decode) img.decode().catch(() => {})
+    })
+  }, [activeCategory, currentIndex, total, photos, prevIndex, nextIndex, prev2Index, next2Index])
+
+  const commit = async (direction) => {
     if (!panelWidthPx || total < 2) return
-    if (isAnimatingRef.current) {
-      pendingDirectionRef.current = direction
-      return
+    if (isAnimatingRef.current) return
+
+    // Determine which image will become the new center and decode it BEFORE animating
+    const targetIndex = direction === 'next'
+      ? (currentIndex + 1) % total
+      : (currentIndex - 1 + total) % total
+
+    const targetSrc = photos[targetIndex]
+    if (typeof window !== 'undefined') {
+      // decode center target + the new neighbor to prevent any flash
+      const neighborIndex = direction === 'next'
+        ? (currentIndex + 2) % total
+        : (currentIndex - 2 + total) % total
+
+      const neighborSrc = photos[neighborIndex]
+      await Promise.all([decodeImage(targetSrc), decodeImage(neighborSrc)])
     }
 
-    let target = baseOffsetPx
-    if (direction === 'next') {
-      target = baseOffsetPx - panelWidthPx
-    } else if (direction === 'prev') {
-      target = baseOffsetPx + panelWidthPx
-    }
-
-    // Avoid starting an animation if we're already at the target.
-    if (target === translatePx) return
-
-    setSlideDirection(direction)
     isAnimatingRef.current = true
     setIsAnimating(true)
-    setTranslatePx(target)
+    slideDirRef.current = direction
+
+    if (direction === 'next') {
+      applyTransform(baseOffsetPx - panelWidthPx, true)
+    } else {
+      applyTransform(baseOffsetPx + panelWidthPx, true)
+    }
   }
 
-  const handleTransitionEnd = () => {
-    if (!isAnimating) return
+  const handleTransitionEnd = (e) => {
+    if (!isAnimatingRef.current) return
+    if (!e || e.propertyName !== 'transform') return
 
-    if (slideDirection === 'next' && total) {
-      setCurrentIndex(i => (i + 1) % total)
-    } else if (slideDirection === 'prev' && total) {
-      setCurrentIndex(i => (i - 1 + total) % total)
-    }
-
-    // Stop animation and snap back to the resting position
-    if (transitionTimeoutRef.current) {
-      clearTimeout(transitionTimeoutRef.current)
-      transitionTimeoutRef.current = null
-    }
+    const dir = slideDirRef.current
+    slideDirRef.current = null
     isAnimatingRef.current = false
     setIsAnimating(false)
-    setSlideDirection(null)
-    setTranslatePx(baseOffsetPx)
 
-    if (pendingDirectionRef.current) {
-      const nextDirection = pendingDirectionRef.current
-      pendingDirectionRef.current = null
-      // perf: chain a single queued swipe for fast flicks
-      commit(nextDirection)
-    }
-  }
+    // Snap back first (no transition) to avoid any visual mismatch
+    applyTransform(baseOffsetPx, false)
 
-  useEffect(() => {
-    if (!isAnimating) return
-    transitionTimeoutRef.current = setTimeout(() => {
-      handleTransitionEnd()
-    }, 450)
-    return () => {
-      if (transitionTimeoutRef.current) {
-        clearTimeout(transitionTimeoutRef.current)
-        transitionTimeoutRef.current = null
+    // Update index on next frame
+    requestAnimationFrame(() => {
+      if (dir === 'next') {
+        setCurrentIndex((i) => (i + 1) % total)
+      } else if (dir === 'prev') {
+        setCurrentIndex((i) => (i - 1 + total) % total)
       }
-    }
-  }, [isAnimating, baseOffsetPx, slideDirection, total])
-
-  const handlePointerDown = event => {
-    if (isAnimatingRef.current || !panelWidthPx || total < 2) return
-    event.currentTarget.setPointerCapture(event.pointerId)
-    setIsDragging(true)
-    startXRef.current = event.clientX
-    lastXRef.current = event.clientX
-    lastTimeRef.current = performance.now()
+    })
   }
 
-  const handlePointerMove = event => {
-    if (!isDragging || isAnimatingRef.current || !panelWidthPx || startXRef.current == null) return
-    if (event.cancelable) event.preventDefault()
-    const deltaX = event.clientX - startXRef.current
-    const clamped = Math.max(Math.min(deltaX, panelWidthPx), -panelWidthPx)
-    setTranslatePx(baseOffsetPx + clamped)
-    lastXRef.current = event.clientX
-    lastTimeRef.current = performance.now()
-  }
-
-  const handlePointerUp = event => {
-    if (!isDragging || !panelWidthPx || startXRef.current == null) {
-      setIsDragging(false)
-      return
-    }
-
-    const deltaX = event.clientX - startXRef.current
-    const now = performance.now()
-    const timeDelta = now - (lastTimeRef.current ?? now)
-    const positionDelta = event.clientX - (lastXRef.current ?? event.clientX)
-    const velocity = timeDelta > 0 ? positionDelta / timeDelta : 0
-
-    const distanceThreshold = panelWidthPx * 0.2
-    const velocityThreshold = 0.6
-
-    if (deltaX < -distanceThreshold || velocity < -velocityThreshold) {
-      commit('next')
-    } else if (deltaX > distanceThreshold || velocity > velocityThreshold) {
-      commit('prev')
-    } else {
-      if (translatePx !== baseOffsetPx) {
-        setSlideDirection('reset')
-        isAnimatingRef.current = true
-        setIsAnimating(true)
-        setTranslatePx(baseOffsetPx)
-      } else {
-        isAnimatingRef.current = false
-        setIsAnimating(false)
-        setSlideDirection(null)
-      }
-    }
-
-    setIsDragging(false)
-    startXRef.current = null
-    lastXRef.current = null
-    lastTimeRef.current = null
-  }
-
-  const handlePointerCancel = () => {
-    setIsDragging(false)
-    setTranslatePx(baseOffsetPx)
-    startXRef.current = null
-    lastXRef.current = null
-    lastTimeRef.current = null
+  // Render helper: ultra-stable <img> (no Next/Image flicker)
+  const Img = ({ src, alt, priority = false }) => {
+    if (!src) return null
+    return (
+      <img
+        src={src}
+        alt={alt}
+        draggable={false}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchpriority={priority ? 'high' : 'auto'}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain'
+        }}
+      />
+    )
   }
 
   return (
@@ -378,15 +353,6 @@ const Gallery = () => {
         <title>Gallery - Maxwell Guillermo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Gallery by Maxwell Guillermo" />
-        {currentSrc && (
-          <link rel="preload" as="image" href={currentSrc} />
-        )}
-        {prevSrc && (
-          <link rel="preload" as="image" href={prevSrc} />
-        )}
-        {nextSrc && (
-          <link rel="preload" as="image" href={nextSrc} />
-        )}
       </Head>
 
       <Box
@@ -439,6 +405,7 @@ const Gallery = () => {
               —
             </Text>
 
+            {/* Category menu */}
             <Box
               w="100%"
               display="flex"
@@ -457,7 +424,7 @@ const Gallery = () => {
               >
                 me
               </Box>
-              <Text as="span" color="black">|</Text>
+              <Text as="span">|</Text>
               <Box
                 as="button"
                 type="button"
@@ -467,7 +434,7 @@ const Gallery = () => {
               >
                 food
               </Box>
-              <Text as="span" color="black">|</Text>
+              <Text as="span">|</Text>
               <Box
                 as="button"
                 type="button"
@@ -479,6 +446,7 @@ const Gallery = () => {
               </Box>
             </Box>
 
+            {/* Carousel: buttons-only */}
             <Box w="100%" display="flex" justifyContent="center" mt={4}>
               <Box
                 ref={containerRef}
@@ -487,143 +455,99 @@ const Gallery = () => {
                 h={{ base: '60vh', md: '70vh' }}
                 overflow="hidden"
                 userSelect="none"
-                onPointerDown={handlePointerDown}
-                onPointerMove={handlePointerMove}
-                onPointerUp={handlePointerUp}
-                onPointerCancel={handlePointerCancel}
-                cursor={isDragging ? 'grabbing' : 'grab'}
-                touchAction="pan-y"
               >
-                {/* 5-panel track: prev2 | prev | center | next | next2 */}
                 <Box
+                  ref={trackRef}
                   as="div"
                   display="flex"
                   h="100%"
                   w="max-content"
                   style={{ willChange: 'transform' }}
-                  transform={`translate3d(${translatePx}px, 0, 0)`}
-                  transition={isAnimating ? 'transform 0.35s ease-in-out' : 'none'}
                   onTransitionEnd={handleTransitionEnd}
                 >
+                  {/* prev2 */}
                   <Box
-                    flex={`0 0 ${panelWidthPx}px`}
+                    flex={`0 0 ${panelWidthPx || 0}px`}
+                    minW={panelWidthPx ? `${panelWidthPx}px` : '33.333%'}
                     h="100%"
                     position="relative"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     opacity={0.25}
+                    pointerEvents="none"
                   >
-                    {photos[prev2Index] && (
-                      <Image
-                        src={photos[prev2Index]}
-                        alt={`Photo ${prev2Index + 1}`}
-                        fill
-                        style={{ objectFit: 'contain' }}
-                        sizes="33vw"
-                        loading="lazy"
-                        draggable={false}
-                      />
-                    )}
+                    <Img src={photos[prev2Index]} alt={`Photo ${prev2Index + 1}`} />
                   </Box>
 
+                  {/* prev */}
                   <Box
-                    flex={`0 0 ${panelWidthPx}px`}
+                    flex={`0 0 ${panelWidthPx || 0}px`}
+                    minW={panelWidthPx ? `${panelWidthPx}px` : '33.333%'}
                     h="100%"
                     position="relative"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     opacity={0.25}
-                    cursor="pointer"
-                    onClick={() => commit('prev')}
+                    pointerEvents="none"
                   >
-                    {photos[prevIndex] && (
-                      <Image
-                        src={photos[prevIndex]}
-                        alt={`Previous photo ${prevIndex + 1}`}
-                        fill
-                        style={{ objectFit: 'contain' }}
-                        sizes="33vw"
-                        loading="lazy"
-                        draggable={false}
-                      />
-                    )}
+                    <Img src={photos[prevIndex]} alt={`Photo ${prevIndex + 1}`} />
                   </Box>
 
+                  {/* center */}
                   <Box
-                    flex={`0 0 ${panelWidthPx}px`}
+                    flex={`0 0 ${panelWidthPx || 0}px`}
+                    minW={panelWidthPx ? `${panelWidthPx}px` : '33.333%'}
                     h="100%"
                     position="relative"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     opacity={1}
+                    pointerEvents="none"
                   >
-                    {photos[currentIndex] && (
-                      <Image
-                        src={photos[currentIndex]}
-                        alt={`Photo ${currentIndex + 1}`}
-                        fill
-                        style={{ objectFit: 'contain' }}
-                        sizes="33vw"
+                    <Img
+                      src={photos[currentIndex]}
+                      alt={`Photo ${currentIndex + 1}`}
                       priority={activeCategory === 'me' && currentIndex === 0}
-                        loading={currentIndex === 0 ? 'eager' : 'lazy'}
-                        draggable={false}
-                      />
-                    )}
+                    />
                   </Box>
 
+                  {/* next */}
                   <Box
-                    flex={`0 0 ${panelWidthPx}px`}
+                    flex={`0 0 ${panelWidthPx || 0}px`}
+                    minW={panelWidthPx ? `${panelWidthPx}px` : '33.333%'}
                     h="100%"
                     position="relative"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     opacity={0.25}
-                    cursor="pointer"
-                    onClick={() => commit('next')}
+                    pointerEvents="none"
                   >
-                    {photos[nextIndex] && (
-                      <Image
-                        src={photos[nextIndex]}
-                        alt={`Next photo ${nextIndex + 1}`}
-                        fill
-                        style={{ objectFit: 'contain' }}
-                        sizes="33vw"
-                        loading="lazy"
-                        draggable={false}
-                      />
-                    )}
+                    <Img src={photos[nextIndex]} alt={`Photo ${nextIndex + 1}`} />
                   </Box>
 
+                  {/* next2 */}
                   <Box
-                    flex={`0 0 ${panelWidthPx}px`}
+                    flex={`0 0 ${panelWidthPx || 0}px`}
+                    minW={panelWidthPx ? `${panelWidthPx}px` : '33.333%'}
                     h="100%"
                     position="relative"
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     opacity={0.25}
+                    pointerEvents="none"
                   >
-                    {photos[next2Index] && (
-                      <Image
-                        src={photos[next2Index]}
-                        alt={`Photo ${next2Index + 1}`}
-                        fill
-                        style={{ objectFit: 'contain' }}
-                        sizes="33vw"
-                        loading="lazy"
-                        draggable={false}
-                      />
-                    )}
+                    <Img src={photos[next2Index]} alt={`Photo ${next2Index + 1}`} />
                   </Box>
                 </Box>
               </Box>
             </Box>
 
-            {/* minimal arrow controls below the carousel */}
+            {/* ONLY navigation controls */}
             <Box mt={3} w="100%" display="flex" justifyContent="center" alignItems="center" gap={4}>
               <Box
                 as="button"
@@ -637,9 +561,9 @@ const Gallery = () => {
                 borderColor="gray.300"
                 bg="white"
                 _hover={{ bg: 'gray.50' }}
-                disabled={!panelWidthPx || isAnimating}
-                opacity={!panelWidthPx || isAnimating ? 0.5 : 1}
-                cursor={!panelWidthPx || isAnimating ? 'not-allowed' : 'pointer'}
+                disabled={!panelWidthPx || isAnimating || total < 2}
+                opacity={!panelWidthPx || isAnimating || total < 2 ? 0.5 : 1}
+                cursor={!panelWidthPx || isAnimating || total < 2 ? 'not-allowed' : 'pointer'}
               >
                 ←
               </Box>
@@ -655,9 +579,9 @@ const Gallery = () => {
                 borderColor="gray.300"
                 bg="white"
                 _hover={{ bg: 'gray.50' }}
-                disabled={!panelWidthPx || isAnimating}
-                opacity={!panelWidthPx || isAnimating ? 0.5 : 1}
-                cursor={!panelWidthPx || isAnimating ? 'not-allowed' : 'pointer'}
+                disabled={!panelWidthPx || isAnimating || total < 2}
+                opacity={!panelWidthPx || isAnimating || total < 2 ? 0.5 : 1}
+                cursor={!panelWidthPx || isAnimating || total < 2 ? 'not-allowed' : 'pointer'}
               >
                 →
               </Box>
