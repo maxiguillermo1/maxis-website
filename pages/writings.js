@@ -12,7 +12,7 @@ import {
 
 const Writings = () => {
   const writings = [
-    { title: 'Coming Soon', date: 'Coming 2025', link: '#' },
+    { title: 'Coming Soon', date: 'Coming 2026', link: '#' },
     // Add more writings here as you create them
     // Example format:
     // { title: 'My First Post', date: 'Jan 2025', link: '/writings/my-first-post', hasAsterisk: false },
