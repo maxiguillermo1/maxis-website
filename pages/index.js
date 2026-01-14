@@ -121,7 +121,7 @@ const Home = () => {
               color="black"
               lineHeight="1.6"
             >
-              In my past, I built full-stack web applications, developed AI/ML systems, applied cybersecurity best practices, designed intuitive UI/UX experiences, and explored financial analysis through predictive and decision-based frameworks. I studied Computer Science with a minor in Cybersecurity at California State University, Long Beach. Go Beach!
+             In my past, I built full-stack web applications, developed AI/ML systems, applied cybersecurity principles, designed user-centered UI/UX experiences, and worked with financial analysis using predictive and decision-based frameworks. I studied Computer Science with a minor in Cybersecurity at California State University, Long Beach. Go Beach! 
             </Text>
 
             <Text

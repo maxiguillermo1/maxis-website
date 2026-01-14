@@ -57,7 +57,7 @@ const Gallery = () => {
         '/images/me/me45.jpg'
       ],
       food: [
-        '/images/food/food1.jpeg',
+        '/images/food/food1.jpg',
         '/images/food/food2.jpeg',
         '/images/food/food3.jpeg',
         '/images/food/food4.jpeg',
@@ -192,10 +192,17 @@ const Gallery = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
   const [slideDirection, setSlideDirection] = useState(null) // 'prev' | 'next' | 'reset' | null
 
   const containerRef = useRef(null)
+  const transitionTimeoutRef = useRef(null)
   const [containerWidth, setContainerWidth] = useState(0)
+
+  const startXRef = useRef(null)
+  const lastXRef = useRef(null)
+  const lastTimeRef = useRef(null)
+  const pendingDirectionRef = useRef(null)
 
   // Measure container width
   useEffect(() => {
@@ -223,6 +230,7 @@ const Gallery = () => {
     setIsAnimating(false)
     setSlideDirection(null)
     setTranslatePx(baseOffsetPx)
+    pendingDirectionRef.current = null
   }, [activeCategory, baseOffsetPx])
 
   const safeTotal = total || 1
@@ -230,20 +238,30 @@ const Gallery = () => {
   const prevIndex = (currentIndex - 1 + safeTotal) % safeTotal
   const nextIndex = (currentIndex + 1) % safeTotal
   const next2Index = (currentIndex + 2) % safeTotal
+  const currentSrc = photos[currentIndex]
+  const prevSrc = photos[prevIndex]
+  const nextSrc = photos[nextIndex]
 
   const commit = direction => {
-    if (isAnimating || !panelWidthPx) return
+    if (!panelWidthPx || total < 2) return
+    if (isAnimating) {
+      pendingDirectionRef.current = direction
+      return
+    }
+
+    let target = baseOffsetPx
+    if (direction === 'next') {
+      target = baseOffsetPx - panelWidthPx
+    } else if (direction === 'prev') {
+      target = baseOffsetPx + panelWidthPx
+    }
+
+    // Avoid starting an animation if we're already at the target.
+    if (target === translatePx) return
 
     setSlideDirection(direction)
     setIsAnimating(true)
-
-    if (direction === 'next') {
-      setTranslatePx(baseOffsetPx - panelWidthPx)
-    } else if (direction === 'prev') {
-      setTranslatePx(baseOffsetPx + panelWidthPx)
-    } else {
-      setTranslatePx(baseOffsetPx)
-    }
+    setTranslatePx(target)
   }
 
   const handleTransitionEnd = () => {
@@ -256,9 +274,96 @@ const Gallery = () => {
     }
 
     // Stop animation and snap back to the resting position
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current)
+      transitionTimeoutRef.current = null
+    }
     setIsAnimating(false)
     setSlideDirection(null)
     setTranslatePx(baseOffsetPx)
+
+    if (pendingDirectionRef.current) {
+      const nextDirection = pendingDirectionRef.current
+      pendingDirectionRef.current = null
+      // perf: chain a single queued swipe for fast flicks
+      commit(nextDirection)
+    }
+  }
+
+  useEffect(() => {
+    if (!isAnimating) return
+    transitionTimeoutRef.current = setTimeout(() => {
+      handleTransitionEnd()
+    }, 450)
+    return () => {
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current)
+        transitionTimeoutRef.current = null
+      }
+    }
+  }, [isAnimating, baseOffsetPx, slideDirection, total])
+
+  const handlePointerDown = event => {
+    if (isAnimating || !panelWidthPx || total < 2) return
+    event.currentTarget.setPointerCapture(event.pointerId)
+    setIsDragging(true)
+    startXRef.current = event.clientX
+    lastXRef.current = event.clientX
+    lastTimeRef.current = performance.now()
+  }
+
+  const handlePointerMove = event => {
+    if (!isDragging || isAnimating || !panelWidthPx || startXRef.current == null) return
+    if (event.cancelable) event.preventDefault()
+    const deltaX = event.clientX - startXRef.current
+    const clamped = Math.max(Math.min(deltaX, panelWidthPx), -panelWidthPx)
+    setTranslatePx(baseOffsetPx + clamped)
+    lastXRef.current = event.clientX
+    lastTimeRef.current = performance.now()
+  }
+
+  const handlePointerUp = event => {
+    if (!isDragging || !panelWidthPx || startXRef.current == null) {
+      setIsDragging(false)
+      return
+    }
+
+    const deltaX = event.clientX - startXRef.current
+    const now = performance.now()
+    const timeDelta = now - (lastTimeRef.current ?? now)
+    const positionDelta = event.clientX - (lastXRef.current ?? event.clientX)
+    const velocity = timeDelta > 0 ? positionDelta / timeDelta : 0
+
+    const distanceThreshold = panelWidthPx * 0.2
+    const velocityThreshold = 0.6
+
+    if (deltaX < -distanceThreshold || velocity < -velocityThreshold) {
+      commit('next')
+    } else if (deltaX > distanceThreshold || velocity > velocityThreshold) {
+      commit('prev')
+    } else {
+      if (translatePx !== baseOffsetPx) {
+        setSlideDirection('reset')
+        setIsAnimating(true)
+        setTranslatePx(baseOffsetPx)
+      } else {
+        setIsAnimating(false)
+        setSlideDirection(null)
+      }
+    }
+
+    setIsDragging(false)
+    startXRef.current = null
+    lastXRef.current = null
+    lastTimeRef.current = null
+  }
+
+  const handlePointerCancel = () => {
+    setIsDragging(false)
+    setTranslatePx(baseOffsetPx)
+    startXRef.current = null
+    lastXRef.current = null
+    lastTimeRef.current = null
   }
 
   return (
@@ -267,6 +372,15 @@ const Gallery = () => {
         <title>Gallery - Maxwell Guillermo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Gallery by Maxwell Guillermo" />
+        {currentSrc && (
+          <link rel="preload" as="image" href={currentSrc} />
+        )}
+        {prevSrc && (
+          <link rel="preload" as="image" href={prevSrc} />
+        )}
+        {nextSrc && (
+          <link rel="preload" as="image" href={nextSrc} />
+        )}
       </Head>
 
       <Box
@@ -367,6 +481,12 @@ const Gallery = () => {
                 h={{ base: '60vh', md: '70vh' }}
                 overflow="hidden"
                 userSelect="none"
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerCancel}
+                cursor={isDragging ? 'grabbing' : 'grab'}
+                touchAction="pan-y"
               >
                 {/* 5-panel track: prev2 | prev | center | next | next2 */}
                 <Box
