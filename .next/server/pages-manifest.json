@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/writings": "pages/writings.js",
-  "/legacy": "pages/legacy.js",
-  "/photography": "pages/photography.js"
+  "/legacy/me": "pages/legacy/me.js",
+  "/legacy/works": "pages/legacy/works.js",
+  "/photography": "pages/photography.js",
+  "/": "pages/index.js"
 }

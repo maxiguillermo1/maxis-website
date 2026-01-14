@@ -39,7 +39,7 @@ const Home = () => {
               lineHeight="1.2"
               fontFamily="serif"
             >
-              Maxwell Guillermo
+              Maxi Guillermo
             </Heading>
 
             <HStack
@@ -81,7 +81,7 @@ const Home = () => {
               <Text as="span" color="black">|</Text>
               <Link
                 as={NextLink}
-                href="/legacy"
+                href="/legacy/me"
                 textDecoration="none"
                 color="blue.600"
                 _hover={{ textDecoration: 'underline' }}
@@ -111,9 +111,9 @@ const Home = () => {
                 fontFamily="sans-serif"
                 _hover={{ opacity: 0.7 }}
               >
-                Melody
+                Moody
               </Link>
-              . An app to connect people through music.
+              . An app to journal how your day went.
             </Text>
 
             <Text
@@ -121,7 +121,7 @@ const Home = () => {
               color="black"
               lineHeight="1.6"
             >
-              In the past, I've enjoyed working on full-stack web applications, machine learning projects, cybersecurity research, and building user-centered experiences. I studied Computer Science with a minor in Cybersecurity at California State University, Long Beach.
+              In my past, I built full-stack web applications, developed AI/ML systems, applied cybersecurity best practices, designed intuitive UI/UX experiences, and explored financial analysis through predictive and decision-based frameworks. I studied Computer Science with a minor in Cybersecurity at California State University, Long Beach. Go Beach!
             </Text>
 
             <Text

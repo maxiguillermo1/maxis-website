@@ -30,20 +30,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/legacy": [
+    "/legacy/me": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/legacy.js"
+      "static/chunks/pages/legacy/me.js"
+    ],
+    "/legacy/works": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/legacy/works.js"
     ],
     "/photography": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/photography.js"
-    ],
-    "/writings": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/writings.js"
     ]
   },
   "ampFirstPages": []

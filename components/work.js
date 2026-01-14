@@ -1,10 +1,12 @@
 import NextLink from 'next/link'
-import { Heading, Box, Image, Link, Badge } from '@chakra-ui/react'
+import Image from 'next/image'
+// perf: use next/image for automatic optimization
+import { Heading, Box, Link, Badge } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
 export const Title = ({ children }) => (
   <Box>
-    <Link as={NextLink} href="/works">
+    <Link as={NextLink} href="/legacy/works">
       Works
     </Link>
     <span>
@@ -18,7 +20,15 @@ export const Title = ({ children }) => (
 )
 
 export const WorkImage = ({ src, alt }) => (
-  <Image borderRadius="lg" w="full" src={src} alt={alt} mb={4} />
+  <Box borderRadius="lg" w="full" mb={4} position="relative" overflow="hidden" paddingBottom="56.25%">
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      style={{ objectFit: 'cover', borderRadius: '8px' }}
+      sizes="(max-width: 768px) 100vw, 768px"
+    />
+  </Box>
 )
 
 export const Meta = ({ children }) => (

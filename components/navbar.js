@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import ThemeToggleButton from './theme-toggle-button'
+// perf: modular icon import to reduce bundle size
 import { IoLogoGithub } from 'react-icons/io5'
 
 const LinkItem = ({ href, path, target, children, ...props }) => {
@@ -77,14 +78,11 @@ const Navbar = props => {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
-          <LinkItem href="/me" path={path}>
+          <LinkItem href="/legacy/me" path={path}>
             About Me
           </LinkItem>
-          <LinkItem href="/works" path={path}>
+          <LinkItem href="/legacy/works" path={path}>
             Portfolio
-          </LinkItem>
-          <LinkItem href="/posts" path={path}>
-            Blog
           </LinkItem>
           <LinkItem
             target="_blank"
@@ -115,16 +113,12 @@ const Navbar = props => {
                 aria-label="Options"
               />
               <MenuList>
-                <MenuItem as={MenuLink} href="/me">
+                <MenuItem as={MenuLink} href="/legacy/me">
                   About Me
                 </MenuItem>
                 
-                <MenuItem as={MenuLink} href="/works">
+                <MenuItem as={MenuLink} href="/legacy/works">
                   Portfolio
-                </MenuItem>
-               
-                <MenuItem as={MenuLink} href="/posts">
-                  Blog
                 </MenuItem>
               
               </MenuList>

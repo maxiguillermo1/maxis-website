@@ -1,5 +1,7 @@
 import NextLink from 'next/link'
 import Head from 'next/head'
+import Image from 'next/image'
+// perf: use next/image for automatic optimization and lazy loading
 import {
   Box,
   Container,
@@ -7,8 +9,7 @@ import {
   Text,
   Link,
   VStack,
-  SimpleGrid,
-  Image
+  SimpleGrid
 } from '@chakra-ui/react'
 
 const Photography = () => {
@@ -87,18 +88,20 @@ const Photography = () => {
                   paddingBottom="100%"
                   overflow="hidden"
                   bg="gray.100"
+                  sx={{
+                    '&:hover img': {
+                      opacity: 0.8,
+                      transition: 'opacity 0.2s'
+                    }
+                  }}
                 >
                   <Image
                     src={photo}
                     alt={`Photo ${index + 1}`}
-                    objectFit="cover"
-                    position="absolute"
-                    top={0}
-                    left={0}
-                    width="100%"
-                    height="100%"
-                    _hover={{ opacity: 0.8 }}
-                    transition="opacity 0.2s"
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    loading={index < 8 ? 'eager' : 'lazy'}
                   />
                 </Box>
               ))}
