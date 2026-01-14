@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST={"../components/layouts/main.js -> ../voxel-dog":{id:7690,files:["static/chunks/fb7d5399.60dcb04c381b283c.js","static/chunks/330.21cd96b473306d74.js","static/chunks/690.d1248cd3915a0c12.js"]}};
+self.__REACT_LOADABLE_MANIFEST={"../components/layouts/main.js -> ../voxel-dog":{"id":"../components/layouts/main.js -> ../voxel-dog","files":["static/chunks/components_voxel-dog_js.js"]}}

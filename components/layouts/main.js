@@ -12,7 +12,7 @@ const LazyVoxelDog = dynamic(() => import('../voxel-dog'), {
 
 const Main = ({ children, router }) => {
   const isIndexPage = router.asPath === '/'
-  const isMinimalPage = router.asPath === '/' || router.asPath === '/writings' || router.asPath === '/photography'
+  const isMinimalPage = router.asPath === '/' || router.asPath === '/writings' || router.asPath === '/gallery'
   
   return (
     <Box as="main" pb={8} bg={isMinimalPage ? 'white' : undefined}>

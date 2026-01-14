@@ -1,14 +1,8 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/404": "pages/404.html",
   "/_document": "pages/_document.js",
-  "/legacy/posts": "pages/legacy/posts.js",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.js",
   "/": "pages/index.js",
-  "/legacy/gaming": "pages/legacy/gaming.js",
-  "/legacy/me": "pages/legacy/me.js",
-  "/legacy/works": "pages/legacy/works.js",
-  "/legacy/legacy": "pages/legacy/legacy.js",
-  "/writings": "pages/writings.js",
-  "/photography": "pages/photography.js"
+  "/gallery": "pages/gallery.js"
 }

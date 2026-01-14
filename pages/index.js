@@ -71,12 +71,12 @@ const Home = () => {
               <Text as="span" color="black">|</Text>
               <Link
                 as={NextLink}
-                href="/photography"
+                href="/gallery"
                 textDecoration="none"
                 color="blue.600"
                 _hover={{ textDecoration: 'underline' }}
               >
-                photography
+                gallery
               </Link>
               <Text as="span" color="black">|</Text>
               <Link

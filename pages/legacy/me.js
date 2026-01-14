@@ -137,7 +137,7 @@ I’m eager to join a team where I can learn, contribute, and help create produc
           I ♥
         </Heading>
         <Paragraph>
-          Traveling, Food, Video Games, Music, Photography, Fashion
+          Traveling, Food, Video Games, Music, Gallery, Fashion
         </Paragraph>
       </Section>
 
