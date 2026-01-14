@@ -197,6 +197,7 @@ const Gallery = () => {
 
   const containerRef = useRef(null)
   const transitionTimeoutRef = useRef(null)
+  const isAnimatingRef = useRef(false)
   const [containerWidth, setContainerWidth] = useState(0)
 
   const startXRef = useRef(null)
@@ -230,6 +231,7 @@ const Gallery = () => {
     setIsAnimating(false)
     setSlideDirection(null)
     setTranslatePx(baseOffsetPx)
+    isAnimatingRef.current = false
     pendingDirectionRef.current = null
   }, [activeCategory, baseOffsetPx])
 
@@ -244,7 +246,7 @@ const Gallery = () => {
 
   const commit = direction => {
     if (!panelWidthPx || total < 2) return
-    if (isAnimating) {
+    if (isAnimatingRef.current) {
       pendingDirectionRef.current = direction
       return
     }
@@ -260,6 +262,7 @@ const Gallery = () => {
     if (target === translatePx) return
 
     setSlideDirection(direction)
+    isAnimatingRef.current = true
     setIsAnimating(true)
     setTranslatePx(target)
   }
@@ -278,6 +281,7 @@ const Gallery = () => {
       clearTimeout(transitionTimeoutRef.current)
       transitionTimeoutRef.current = null
     }
+    isAnimatingRef.current = false
     setIsAnimating(false)
     setSlideDirection(null)
     setTranslatePx(baseOffsetPx)
@@ -304,7 +308,7 @@ const Gallery = () => {
   }, [isAnimating, baseOffsetPx, slideDirection, total])
 
   const handlePointerDown = event => {
-    if (isAnimating || !panelWidthPx || total < 2) return
+    if (isAnimatingRef.current || !panelWidthPx || total < 2) return
     event.currentTarget.setPointerCapture(event.pointerId)
     setIsDragging(true)
     startXRef.current = event.clientX
@@ -313,7 +317,7 @@ const Gallery = () => {
   }
 
   const handlePointerMove = event => {
-    if (!isDragging || isAnimating || !panelWidthPx || startXRef.current == null) return
+    if (!isDragging || isAnimatingRef.current || !panelWidthPx || startXRef.current == null) return
     if (event.cancelable) event.preventDefault()
     const deltaX = event.clientX - startXRef.current
     const clamped = Math.max(Math.min(deltaX, panelWidthPx), -panelWidthPx)
@@ -344,9 +348,11 @@ const Gallery = () => {
     } else {
       if (translatePx !== baseOffsetPx) {
         setSlideDirection('reset')
+        isAnimatingRef.current = true
         setIsAnimating(true)
         setTranslatePx(baseOffsetPx)
       } else {
+        isAnimatingRef.current = false
         setIsAnimating(false)
         setSlideDirection(null)
       }
