@@ -1,9 +1,14 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
+  "/404": "pages/404.html",
   "/_document": "pages/_document.js",
+  "/legacy/posts": "pages/legacy/posts.js",
+  "/": "pages/index.js",
+  "/legacy/gaming": "pages/legacy/gaming.js",
   "/legacy/me": "pages/legacy/me.js",
   "/legacy/works": "pages/legacy/works.js",
-  "/photography": "pages/photography.js",
-  "/": "pages/index.js"
+  "/legacy/legacy": "pages/legacy/legacy.js",
+  "/writings": "pages/writings.js",
+  "/photography": "pages/photography.js"
 }

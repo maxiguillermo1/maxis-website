@@ -1,20 +1,7 @@
-// perf: self-host fonts to eliminate render-blocking external requests
-import { M_PLUS_Rounded_1c } from 'next/font/google'
-
-const mPlusRounded = M_PLUS_Rounded_1c({
-  weight: ['300', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true,
-  variable: '--font-m-plus-rounded'
-})
-
+// perf: optimized font loading with display swap (preconnect in _document.js)
 const Fonts = () => (
   <style jsx global>{`
-    :root {
-      --font-m-plus-rounded: ${mPlusRounded.style.fontFamily};
-    }
+    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;700&display=swap');
   `}</style>
 )
 export default Fonts
-export { mPlusRounded }
