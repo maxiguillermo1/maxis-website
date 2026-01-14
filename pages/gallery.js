@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { Box, Container, Heading, Text, Link, VStack } from '@chakra-ui/react'
 
 const Gallery = () => {
+
+  
   const categories = useMemo(
     () => ({
       me: [
@@ -176,6 +178,9 @@ const Gallery = () => {
         '/images/nature/nature32.jpeg'
 
       ],
+
+
+
       // pro removed
     }),
     []
