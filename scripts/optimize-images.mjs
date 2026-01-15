@@ -36,15 +36,10 @@ for (const file of files) {
 
   await fs.mkdir(outDir, { recursive: true });
 
-  // Skip if already processed
-  try {
-    await fs.access(outFile);
-    continue;
-  } catch {}
-
   const image = sharp(file, { failOn: "none" });
 
   await image
+    .rotate()
     .resize({ width: MAX_WIDTH, withoutEnlargement: true })
     .webp({ quality: WEBP_QUALITY })
     .toFile(outFile);
