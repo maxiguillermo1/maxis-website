@@ -8,7 +8,7 @@ const Gallery = () => {
   // Using generators keeps the file maintainable and matches your folder structure.
   const categories = useMemo(
     () => ({
-      me: Array.from({ length: 45 }, (_, i) => `/images_optimized/me/me${i + 1}.webp`),
+      me: Array.from({ length: 54 }, (_, i) => `/images_optimized/me/me${i + 1}.webp`),
       food: Array.from({ length: 78 }, (_, i) => `/images_optimized/food/food${i + 1}.webp`),
       nature: Array.from({ length: 32 }, (_, i) => `/images_optimized/nature/nature${i + 1}.webp`),
       misc: Array.from({ length: 5 }, (_, i) => `/images_optimized/misc/misc${i + 1}.webp`)
@@ -72,6 +72,28 @@ const Gallery = () => {
     const last = photos[total - 1]
     return [last, ...photos, first]
   }, [photos, total])
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !loopedPhotos.length) return
+    const totalLooped = loopedPhotos.length
+    const normalize = (idx) => (idx + totalLooped) % totalLooped
+    const indices = [
+      currentIndex,
+      normalize(currentIndex - 1),
+      normalize(currentIndex + 1),
+      normalize(currentIndex - 2),
+      normalize(currentIndex + 2)
+    ]
+    const unique = Array.from(new Set(indices))
+    unique.forEach((idx) => {
+      const src = loopedPhotos[idx]
+      if (!src) return
+      const img = new window.Image()
+      img.decoding = 'async'
+      img.src = src
+      if (img.decode) img.decode().catch(() => {})
+    })
+  }, [currentIndex, loopedPhotos])
 
   const goPrev = () => {
     if (total < 2) return
