@@ -1,7 +1,8 @@
+import { useEffect, useRef } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import NavBar from '../navbar'
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Container, useColorMode } from '@chakra-ui/react'
 import Footer from '../footer'
 import VoxelDogLoader from '../voxel-dog-loader'
 
@@ -13,9 +14,28 @@ const LazyVoxelDog = dynamic(() => import('../voxel-dog'), {
 const Main = ({ children, router }) => {
   const isIndexPage = router.asPath === '/'
   const isMinimalPage = router.asPath === '/' || router.asPath === '/writings' || router.asPath === '/gallery'
+  const isLegacyPage = router.asPath.startsWith('/legacy')
+  const { colorMode, setColorMode } = useColorMode()
+  const legacyInitializedRef = useRef(false)
+
+  useEffect(() => {
+    // Keep legacy pages dark by default, but allow user toggle.
+    if (isLegacyPage) {
+      if (!legacyInitializedRef.current) {
+        legacyInitializedRef.current = true
+        if (colorMode !== 'dark') setColorMode('dark')
+      }
+      return
+    }
+
+    legacyInitializedRef.current = false
+    if (colorMode !== 'light') {
+      setColorMode('light')
+    }
+  }, [colorMode, isLegacyPage, setColorMode])
   
   return (
-    <Box as="main" pb={8} bg={isMinimalPage ? 'white' : undefined}>
+    <Box as="main" pb={8} bg={isLegacyPage ? undefined : isMinimalPage ? 'white' : undefined}>
       <Head>
         
         
