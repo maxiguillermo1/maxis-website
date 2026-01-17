@@ -113,7 +113,7 @@ const Home = () => {
               >
                 Moody
               </Link>
-              . An app to journal how your day went.
+              . A lightweight system for remembering how life actually felt.
             </Text>
 
             <Text
