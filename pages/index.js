@@ -103,7 +103,7 @@ const Home = () => {
               color="black"
               lineHeight="1.6"
             >
-              I'm building{' '}
+              Currently building{' '}
               <Link
                 href="#"
                 textDecoration="underline"
@@ -111,7 +111,7 @@ const Home = () => {
                 fontFamily="sans-serif"
                 _hover={{ opacity: 0.7 }}
               >
-                Moody
+                Moodly
               </Link>
               . A lightweight system for remembering how life actually felt.
             </Text>
