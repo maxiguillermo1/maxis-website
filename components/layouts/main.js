@@ -13,7 +13,11 @@ const LazyVoxelDog = dynamic(() => import('../voxel-dog'), {
 
 const Main = ({ children, router }) => {
   const isIndexPage = router.asPath === '/'
-  const isMinimalPage = router.asPath === '/' || router.asPath === '/writings' || router.asPath === '/gallery'
+  const isMinimalPage =
+    router.asPath === '/' ||
+    router.asPath === '/writings' ||
+    router.asPath === '/gallery' ||
+    router.asPath === '/moodly'
   const isLegacyPage = router.asPath.startsWith('/legacy')
   const { colorMode, setColorMode } = useColorMode()
   const legacyInitializedRef = useRef(false)

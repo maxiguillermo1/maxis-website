@@ -1,7 +1,8 @@
-import { Container, Heading, SimpleGrid, Box, List, ListItem } from '@chakra-ui/react';
+import { Container, Heading, SimpleGrid, Box, Button, Image, Stack, Tag, List, ListItem, useColorModeValue, Icon, Text } from '@chakra-ui/react';
 import Layout from '../../components/layouts/article';
 import Section from '../../components/section';
 import { GridItem } from '../../components/grid-item';
+import { FaGithub, FaMobileAlt, FaDatabase, FaGlobe, FaCamera, FaUserTie } from 'react-icons/fa';
 
 import budgetbuddy from '../../public/images/contents/budget-buddy-main.jpg';
 import thumbGo     from '../../public/images/contents/go-thumbnail.jpg';
@@ -47,6 +48,37 @@ const projects = [
     thumbnail: thumbTT,
     href: 'https://github.com/maxiguillermo1/TIC-TAC-TOE-in-Python',
   },
+];
+
+const languageSkills = [
+  'Python', 'JavaScript', 'SQL', 'Java', 'C++', 'TypeScript', 'HTML', 'CSS', 'C', 'Bash', 'Assembly', 'Kotlin', 'Swift', 'Objective-C',
+];
+const softwareSkills = [
+  'Linux', 'Kali Linux', 'Git', 'Docker', 'AWS', 'Google Cloud Platform', 'Postgres', 'VS Code', 'PyCharm', 'IntelliJ', 'Eclipse', 'Figma',
+];
+
+const skillCards = [
+  {
+    icon: FaGithub,
+    title: 'Git Version Control',
+    description: 'Proficient in using Git for version control and collaboration on software projects.',
+  },
+  {
+    icon: FaMobileAlt,
+    title: 'App Design',
+    description: 'Experienced in designing and prototyping mobile applications with modern UI/UX principles.',
+  },
+  {
+    icon: FaDatabase,
+    title: 'Back-end Development',
+    description: 'Skilled in building robust and scalable backend systems and APIs.',
+  },
+  {
+    icon: FaGlobe,
+    title: 'Web Development',
+    description: 'Full-stack web development using modern frameworks and best practices.',
+  },
+
 ];
 
 // Grouped coursework for better readability
@@ -135,8 +167,41 @@ const Works = () => (
         </SimpleGrid>
       </Section>
 
-      {/* Coursework Section */}
+      {/* Skills Section */}
       <Section delay={0.15}>
+        <Box mb={2}>
+          
+          <Heading as="h3" variant="section-title">
+          Skill-Set
+        </Heading>
+          
+        </Box>
+        <SimpleGrid columns={[1, 1, 3]} spacing={8}>
+          {skillCards.map(card => (
+            <Box
+              key={card.title}
+              bg={useColorModeValue('#E5E5E5', '#202023')}
+              borderRadius="xl"
+              boxShadow="lg"
+              p={8}
+              textAlign="left"
+              transition="box-shadow 0.2s"
+              _hover={{ boxShadow: 'xl' }}
+            >
+              <Icon as={card.icon} w={8} h={8} color={useColorModeValue('secondaryBlue', 'skyBlue')} mb={4} />
+              <Text fontWeight="bold" fontSize="lg" color={useColorModeValue('secondaryBlue', 'skyBlue')} mb={2}>
+                {card.title}
+              </Text>
+              <Text color={useColorModeValue('gray.700', 'gray.200')} fontSize="sm">
+                {card.description}
+              </Text>
+            </Box>
+          ))}
+        </SimpleGrid>
+      </Section>
+
+      {/* Coursework Section */}
+      <Section delay={0.2}>
       <Heading as="h4" variant="section-title">
           Relevant Coursework
         </Heading>
