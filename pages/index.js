@@ -81,16 +81,6 @@ const Home = () => {
               <Text as="span" color="black">|</Text>
               <Link
                 as={NextLink}
-                href="/moodly"
-                textDecoration="none"
-                color="blue.600"
-                _hover={{ textDecoration: 'underline' }}
-              >
-                moodly
-              </Link>
-              <Text as="span" color="black">|</Text>
-              <Link
-                as={NextLink}
                 href="/legacy/me"
                 textDecoration="none"
                 color="blue.600"

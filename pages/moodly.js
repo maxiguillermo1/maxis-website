@@ -124,7 +124,7 @@ const Moodly = () => {
         pt={20}
       >
         <Container maxW="container.md" px={{ base: 6, md: 8 }} py={8}>
-          <VStack spacing={6} align="flex-start" maxW="700px">
+          <VStack spacing={6} align="flex-start" maxW="700px" color="black">
             <Link
               as={NextLink}
               href="/"
@@ -157,7 +157,7 @@ const Moodly = () => {
               Daily mood reflection with a visual calendar heat map.
             </Text>
 
-            <Box display="flex" alignItems="center" gap={3} flexWrap="wrap">
+            <Box display="flex" alignItems="center" gap={3} flexWrap="wrap" color="black">
               <Badge colorScheme="orange">In progress</Badge>
               <Link
                 href="https://github.com/maxiguillermo1/moodly"
@@ -197,7 +197,7 @@ const Moodly = () => {
                 <Box key={screen.title}>
                   <Box
                     position="relative"
-                    borderRadius="12px"
+                    borderRadius="28px"
                     overflow="hidden"
                     paddingBottom="140%"
                     cursor="pointer"
@@ -207,14 +207,14 @@ const Moodly = () => {
                       src={screen.src}
                       alt={screen.title}
                       fill
-                      style={{ objectFit: 'contain' }}
+                      style={{ objectFit: 'contain', borderRadius: '28px' }}
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </Box>
-                  <Text fontWeight="600" mt={3}>
+                  <Text fontWeight="600" mt={3} color="black">
                     {screen.title}
                   </Text>
-                  <UnorderedList spacing={1} mt={2} ml={5}>
+                  <UnorderedList spacing={1} mt={2} ml={5} color="black">
                     {screen.bullets.map(bullet => (
                       <ListItem key={bullet}>{bullet}</ListItem>
                     ))}
@@ -226,7 +226,7 @@ const Moodly = () => {
             <Heading as="h2" fontSize={{ base: 'xl', md: '2xl' }} color="black" mt={6}>
               What I’m building next
             </Heading>
-            <UnorderedList spacing={2} ml={5}>
+            <UnorderedList spacing={2} ml={5} color="black">
               <ListItem>Polish the daily flow and reduce taps</ListItem>
               <ListItem>Improve performance on year overview views</ListItem>
               <ListItem>Refine the journaling UI and microcopy</ListItem>
@@ -242,15 +242,6 @@ const Moodly = () => {
             >
               Back to Portfolio
             </Link>
-            <Link
-              href="https://github.com/maxiguillermo1/moodly"
-              target="_blank"
-              textDecoration="none"
-              color="blue.600"
-              _hover={{ textDecoration: 'underline' }}
-            >
-              GitHub
-            </Link>
           </VStack>
         </Container>
       </Box>
@@ -261,13 +252,13 @@ const Moodly = () => {
           <ModalHeader>{activeScreen?.title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Box position="relative" borderRadius="12px" overflow="hidden" paddingBottom="56.25%">
+            <Box position="relative" borderRadius="28px" overflow="hidden" paddingBottom="56.25%">
               {activeScreen && (
                 <Image
                   src={activeScreen.src}
                   alt={activeScreen.title}
                   fill
-                  style={{ objectFit: 'contain' }}
+                  style={{ objectFit: 'contain', borderRadius: '28px' }}
                   sizes="(max-width: 768px) 100vw, 60vw"
                 />
               )}
