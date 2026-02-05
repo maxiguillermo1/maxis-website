@@ -246,13 +246,21 @@ const Moodly = () => {
         </Container>
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} size="full" isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent maxW="100vw" maxH="100vh" borderRadius="0" bg="white">
           <ModalHeader>{activeScreen?.title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Box position="relative" borderRadius="28px" overflow="hidden" paddingBottom="56.25%">
+            <Box
+              position="relative"
+              borderRadius="28px"
+              overflow="hidden"
+              w="100%"
+              h={{ base: '80vh', md: '85vh' }}
+              maxH="85vh"
+              bg="white"
+            >
               {activeScreen && (
                 <Image
                   src={activeScreen.src}
