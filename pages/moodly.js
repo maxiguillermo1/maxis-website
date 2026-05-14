@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   Box,
   Container,
@@ -9,6 +11,7 @@ import {
   Text,
   Link,
   VStack,
+  HStack,
   SimpleGrid,
   Badge,
   UnorderedList,
@@ -22,7 +25,7 @@ import {
   ModalCloseButton
 } from '@chakra-ui/react'
 
-const screens = [
+const originalScreens = [
   {
     src: '/images/moodly/calendar-screen-1-view.jpg',
     title: 'Calendar — Monthly View (Example 1)',
@@ -94,10 +97,228 @@ const screens = [
   }
 ]
 
+const updatedScreens = [
+  {
+    src: '/images/moodly/v2/today-screen.png',
+    title: 'Today — Daily Entry',
+    bullets: [
+      'Log one mood for the day with a lightweight note',
+      'Review Goals, Reminders, and Habits from the same daily surface',
+      'Quick-add habit chips keep repeated actions easy to capture',
+      'Designed to make reflection feel immediate and low-friction'
+    ]
+  },
+  {
+    src: '/images/moodly/v2/calendar-month-view.png',
+    title: 'Calendar — Monthly View',
+    bullets: [
+      'Shows daily mood entries across a clean month layout',
+      'Colored circles make recent patterns easy to scan',
+      'Selected days are highlighted without overwhelming the calendar',
+      'Scroll into future months while preserving the same rhythm'
+    ]
+  },
+  {
+    src: '/images/moodly/v2/calendar-year-view.png',
+    title: 'Calendar — Year Overview',
+    bullets: [
+      'Displays a full year of mood history at a glance',
+      'Dense color mapping reveals long-term trends and streaks',
+      'Month groups make larger emotional patterns easier to compare',
+      'Bottom navigation keeps the calendar, today, and journal close'
+    ]
+  },
+  {
+    src: '/images/moodly/v2/journal-page.png',
+    title: 'Journal — Log View',
+    bullets: [
+      'Chronological list of entries with the newest days first',
+      'Short note previews preserve context without adding clutter',
+      'Mood badges summarize each day with a compact visual cue',
+      'Tapping an entry opens the full day for review or editing'
+    ]
+  },
+  {
+    src: '/images/moodly/v2/journal-sort-view.png',
+    title: 'Journal — Sort Controls',
+    bullets: [
+      'Expandable sorting keeps secondary controls out of the way',
+      'Entries can be explored by recency, month, weekday, or mood',
+      'The list stays visible while filters are open',
+      'Controls follow the same calm card treatment as the journal'
+    ]
+  },
+  {
+    src: '/images/moodly/v2/goals-page.png',
+    title: 'Goals — Progress Tracking',
+    bullets: [
+      'Track longer-term goals beside daily journal entries',
+      'Progress bars communicate completion at a glance',
+      'Goal types and categories keep context lightweight',
+      'Archived goals remain separate from the daily flow'
+    ]
+  },
+  {
+    src: '/images/moodly/v2/habits-page.png',
+    title: 'Habits — Daily Toggles',
+    bullets: [
+      'Reusable habits can be enabled for daily tracking',
+      'Large toggles support quick completion and review',
+      'Each habit includes compact supporting copy and streak context',
+      'The same habits surface on Today for fast logging'
+    ]
+  },
+  {
+    src: '/images/moodly/v2/reminders-page.png',
+    title: 'Reminders — Day Notes',
+    bullets: [
+      'Capture gentle reminders tied to a specific calendar day',
+      'Empty states explain the feature without adding noise',
+      'Quick input stays anchored at the bottom for easy adding',
+      'Built for in-app nudges before notification support expands'
+    ]
+  },
+  {
+    src: '/images/moodly/v2/settings-view.png',
+    title: 'Settings — Preferences & Extensions',
+    bullets: [
+      'Summarizes entry count and most common mood',
+      'Appearance controls keep automatic, dark mode, and gradients clear',
+      'Extensions allow Habits, Goals, and Reminders to be toggled',
+      'Settings stay consistent with the app’s minimal card language'
+    ]
+  }
+]
+
+const versions = [
+  {
+    id: '1',
+    label: '1',
+    screens: originalScreens,
+    subtitle: 'Daily mood reflection with a visual calendar heat map.',
+    description:
+      'Moodly is a lightweight journaling app that makes daily reflection feel simple and visual. It centers your entries in a calendar-style heat map so you can spot trends at a glance and keep a consistent habit without friction.',
+    nextItems: [
+      'Polish the daily flow and reduce taps',
+      'Improve performance on year overview views',
+      'Refine the journaling UI and microcopy',
+      'Expand accessibility and offline resilience'
+    ]
+  },
+  {
+    id: '2',
+    label: '2',
+    screens: updatedScreens,
+    subtitle: 'A calmer daily reflection system for moods, habits, goals, and reminders.',
+    description:
+      'Moodly is a lightweight journaling app that helps daily reflection stay simple and visual. It brings mood tracking, habit check-ins, gentle reminders, and long-term goals into one quiet system so patterns are easier to notice without adding friction.',
+    nextItems: [
+      'Tune the daily flow across moods, habits, goals, and reminders',
+      'Improve performance on dense calendar and year overview views',
+      'Refine sorting, empty states, and journal microcopy',
+      'Expand accessibility, offline resilience, and future notification support'
+    ]
+  }
+]
+
+const DEFAULT_VERSION_ID = '2'
+
+const pageVariants = {
+  hidden: { opacity: 0, y: 8 },
+  enter: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 }
+}
+
+const VersionSwitcher = ({ activeVersionId }) => (
+  <HStack
+    as="nav"
+    aria-label="Moodly page versions"
+    spacing={0}
+    border="1px solid"
+    borderColor="blackAlpha.200"
+    borderRadius="full"
+    p="2px"
+    bg="blackAlpha.50"
+  >
+    {versions.map(version => {
+      const isActive = version.id === activeVersionId
+
+      return (
+        <Link
+          key={version.id}
+          as={NextLink}
+          href={{ pathname: '/moodly', query: { version: version.id } }}
+          aria-current={isActive ? 'page' : undefined}
+          aria-label={`View Moodly page version ${version.label}`}
+          minW="28px"
+          h="28px"
+          px={2}
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          borderRadius="full"
+          fontSize="sm"
+          fontWeight="600"
+          lineHeight="1"
+          color={isActive ? 'black' : 'blackAlpha.600'}
+          bg={isActive ? 'white' : 'transparent'}
+          boxShadow={isActive ? '0 1px 4px rgba(0, 0, 0, 0.08)' : 'none'}
+          textDecoration="none"
+          _hover={{ textDecoration: 'none', color: 'black' }}
+          _focusVisible={{ boxShadow: '0 0 0 2px rgba(49, 130, 206, 0.45)' }}
+        >
+          {version.label}
+        </Link>
+      )
+    })}
+  </HStack>
+)
+
+const ScreensGrid = ({ screens, activeVersionId, onOpenScreen }) => (
+  <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} w="100%">
+    {screens.map((screen, index) => (
+      <Box key={screen.title}>
+        <Box
+          position="relative"
+          borderRadius="28px"
+          overflow="hidden"
+          paddingBottom="140%"
+          cursor="pointer"
+          onClick={() => onOpenScreen(index)}
+        >
+          <Image
+            src={screen.src}
+            alt={screen.title}
+            fill
+            priority={activeVersionId === DEFAULT_VERSION_ID && index === 0}
+            style={{ objectFit: 'contain', borderRadius: '28px' }}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </Box>
+        <Text fontWeight="600" mt={3} color="black">
+          {screen.title}
+        </Text>
+        <UnorderedList spacing={1} mt={2} ml={5} color="black">
+          {screen.bullets.map(bullet => (
+            <ListItem key={bullet}>{bullet}</ListItem>
+          ))}
+        </UnorderedList>
+      </Box>
+    ))}
+  </SimpleGrid>
+)
+
 const Moodly = () => {
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [activeIndex, setActiveIndex] = useState(0)
-  const activeScreen = screens[activeIndex]
+  const requestedVersion = Array.isArray(router.query.version)
+    ? router.query.version[0]
+    : router.query.version
+  const activeVersion =
+    versions.find(version => version.id === requestedVersion) ||
+    versions.find(version => version.id === DEFAULT_VERSION_ID)
+  const activeScreen = activeVersion.screens[activeIndex]
 
   const openModal = index => {
     setActiveIndex(index)
@@ -148,100 +369,88 @@ const Moodly = () => {
               Moodly
             </Heading>
 
-            <Text
-              fontSize={{ base: 'sm', md: 'md' }}
-              color="black"
-              fontStyle="italic"
-              fontFamily="sans-serif"
-            >
-              Daily mood reflection with a visual calendar heat map.
-            </Text>
-
-            <Box display="flex" alignItems="center" gap={3} flexWrap="wrap" color="black">
-              <Badge colorScheme="orange">In progress</Badge>
-              <Link
-                href="https://github.com/maxiguillermo1/moodly"
-                target="_blank"
-                textDecoration="none"
-                color="blue.600"
-                fontFamily="sans-serif"
-                _hover={{ textDecoration: 'underline' }}
+            <AnimatePresence exitBeforeEnter initial={false}>
+              <motion.div
+                key={activeVersion.id}
+                initial="hidden"
+                animate="enter"
+                exit="exit"
+                variants={pageVariants}
+                transition={{ duration: 0.22, ease: 'easeOut' }}
+                style={{ width: '100%' }}
               >
-                GitHub
-              </Link>
-              <Text fontSize={{ base: 'sm', md: 'md' }} color="black">
-                React Native + Expo
-              </Text>
-              <Text fontSize={{ base: 'sm', md: 'md' }} color="black">
-                Private + offline-first
-              </Text>
-            </Box>
-
-            <Text fontSize={{ base: 'md', md: 'lg' }} color="black">
-              Moodly is a lightweight journaling app that makes daily reflection
-              feel simple and visual. It centers your entries in a calendar-style
-              heat map so you can spot trends at a glance and keep a consistent
-              habit without friction.
-            </Text>
-
-            <Text fontSize={{ base: 'md', md: 'lg' }} color="black">
-              —
-            </Text>
-
-            <Heading as="h2" fontSize={{ base: 'xl', md: '2xl' }} color="black">
-              Screens
-            </Heading>
-
-            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} w="100%">
-              {screens.map((screen, index) => (
-                <Box key={screen.title}>
-                  <Box
-                    position="relative"
-                    borderRadius="28px"
-                    overflow="hidden"
-                    paddingBottom="140%"
-                    cursor="pointer"
-                    onClick={() => openModal(index)}
+                <VStack spacing={6} align="flex-start" w="100%">
+                  <Text
+                    fontSize={{ base: 'sm', md: 'md' }}
+                    color="black"
+                    fontStyle="italic"
+                    fontFamily="sans-serif"
                   >
-                    <Image
-                      src={screen.src}
-                      alt={screen.title}
-                      fill
-                      style={{ objectFit: 'contain', borderRadius: '28px' }}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </Box>
-                  <Text fontWeight="600" mt={3} color="black">
-                    {screen.title}
+                    {activeVersion.subtitle}
                   </Text>
-                  <UnorderedList spacing={1} mt={2} ml={5} color="black">
-                    {screen.bullets.map(bullet => (
-                      <ListItem key={bullet}>{bullet}</ListItem>
+
+                  <Box display="flex" alignItems="center" gap={3} flexWrap="wrap" color="black">
+                    <Badge colorScheme="orange">In progress</Badge>
+                    <Link
+                      href="https://github.com/maxiguillermo1/moodly"
+                      target="_blank"
+                      textDecoration="none"
+                      color="blue.600"
+                      fontFamily="sans-serif"
+                      _hover={{ textDecoration: 'underline' }}
+                    >
+                      GitHub
+                    </Link>
+                    <Text fontSize={{ base: 'sm', md: 'md' }} color="black">
+                      React Native + Expo
+                    </Text>
+                    <Text fontSize={{ base: 'sm', md: 'md' }} color="black">
+                      Private + offline-first
+                    </Text>
+                  </Box>
+
+                  <Text fontSize={{ base: 'md', md: 'lg' }} color="black">
+                    {activeVersion.description}
+                  </Text>
+
+                  <Text fontSize={{ base: 'md', md: 'lg' }} color="black">
+                    —
+                  </Text>
+
+                  <Heading as="h2" fontSize={{ base: 'xl', md: '2xl' }} color="black">
+                    Screens
+                  </Heading>
+
+                  <ScreensGrid
+                    screens={activeVersion.screens}
+                    activeVersionId={activeVersion.id}
+                    onOpenScreen={openModal}
+                  />
+
+                  <Heading as="h2" fontSize={{ base: 'xl', md: '2xl' }} color="black" mt={6}>
+                    What I’m building next
+                  </Heading>
+                  <UnorderedList spacing={2} ml={5} color="black">
+                    {activeVersion.nextItems.map(item => (
+                      <ListItem key={item}>{item}</ListItem>
                     ))}
                   </UnorderedList>
-                </Box>
-              ))}
-            </SimpleGrid>
 
-            <Heading as="h2" fontSize={{ base: 'xl', md: '2xl' }} color="black" mt={6}>
-              What I’m building next
-            </Heading>
-            <UnorderedList spacing={2} ml={5} color="black">
-              <ListItem>Polish the daily flow and reduce taps</ListItem>
-              <ListItem>Improve performance on year overview views</ListItem>
-              <ListItem>Refine the journaling UI and microcopy</ListItem>
-              <ListItem>Expand accessibility and offline resilience</ListItem>
-            </UnorderedList>
-
-            <Link
-              as={NextLink}
-              href="/legacy/works"
-              color="blue.600"
-              textDecoration="none"
-              _hover={{ textDecoration: 'underline' }}
-            >
-              Back to Portfolio
-            </Link>
+                  <Box display="flex" alignItems="center" gap={3} flexWrap="wrap">
+                    <Link
+                      as={NextLink}
+                      href="/legacy/works"
+                      color="blue.600"
+                      textDecoration="none"
+                      _hover={{ textDecoration: 'underline' }}
+                    >
+                      Back to Portfolio
+                    </Link>
+                    <VersionSwitcher activeVersionId={activeVersion.id} />
+                  </Box>
+                </VStack>
+              </motion.div>
+            </AnimatePresence>
           </VStack>
         </Container>
       </Box>

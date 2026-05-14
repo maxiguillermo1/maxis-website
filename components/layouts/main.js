@@ -17,7 +17,7 @@ const Main = ({ children, router }) => {
     router.asPath === '/' ||
     router.asPath === '/writings' ||
     router.asPath === '/gallery' ||
-    router.asPath === '/moodly'
+    router.pathname === '/moodly'
   const isLegacyPage = router.asPath.startsWith('/legacy')
   const { colorMode, setColorMode } = useColorMode()
   const legacyInitializedRef = useRef(false)
