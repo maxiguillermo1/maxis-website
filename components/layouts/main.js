@@ -39,7 +39,7 @@ const Main = ({ children, router }) => {
   }, [colorMode, isLegacyPage, setColorMode])
   
   return (
-    <Box as="main" pb={8} bg={isLegacyPage ? undefined : isMinimalPage ? 'white' : undefined}>
+    <Box as="main" pb={isIndexPage ? 0 : 8} bg={isLegacyPage ? undefined : isMinimalPage ? 'white' : undefined}>
       <Head>
         
         
