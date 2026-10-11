@@ -27,7 +27,7 @@ import {
 
 const originalScreens = [
   {
-    src: '/images/moodly/calendar-screen-1-view.jpg',
+    src: '/images/kairo/calendar-screen-1-view.jpg',
     title: 'Calendar — Monthly View (Example 1)',
     bullets: [
       'Shows a month-by-month view of logged mood entries',
@@ -38,7 +38,7 @@ const originalScreens = [
     ]
   },
   {
-    src: '/images/moodly/calendar-screen-2-view.jpg',
+    src: '/images/kairo/calendar-screen-2-view.jpg',
     title: 'Calendar — Multi-Month View (Example 2)',
     bullets: [
       'Scroll through multiple months in a continuous view',
@@ -48,7 +48,7 @@ const originalScreens = [
     ]
   },
   {
-    src: '/images/moodly/calendar-view-1.jpg',
+    src: '/images/kairo/calendar-view-1.jpg',
     title: 'Calendar — Year Overview (2025 Example)',
     bullets: [
       'Displays an overview of an entire year of mood entries',
@@ -57,7 +57,7 @@ const originalScreens = [
     ]
   },
   {
-    src: '/images/moodly/calendar-view-2.jpg',
+    src: '/images/kairo/calendar-view-2.jpg',
     title: 'Calendar — Year Overview (2026 Example)',
     bullets: [
       'Shows year layout with partial completion for current year',
@@ -66,7 +66,7 @@ const originalScreens = [
     ]
   },
   {
-    src: '/images/moodly/journal-entry-view.jpg',
+    src: '/images/kairo/journal-entry-view.jpg',
     title: 'Today — Journal Entry',
     bullets: [
       'Select one mood (A+ to F) for the day',
@@ -76,7 +76,7 @@ const originalScreens = [
     ]
   },
   {
-    src: '/images/moodly/journal-log-view.jpg',
+    src: '/images/kairo/journal-log-view.jpg',
     title: 'Journal — Log View',
     bullets: [
       'Chronological list of entries (most recent first)',
@@ -86,7 +86,7 @@ const originalScreens = [
     ]
   },
   {
-    src: '/images/moodly/settings-view.jpg',
+    src: '/images/kairo/settings-view.jpg',
     title: 'Settings — Summary & Preferences',
     bullets: [
       'Shows total entries and most common mood',
@@ -99,7 +99,7 @@ const originalScreens = [
 
 const updatedScreens = [
   {
-    src: '/images/moodly/v2/today-screen.png',
+    src: '/images/kairo/v2/today-screen.png',
     title: 'Today — Daily Entry',
     bullets: [
       'Log one mood for the day with a lightweight note',
@@ -109,7 +109,7 @@ const updatedScreens = [
     ]
   },
   {
-    src: '/images/moodly/v2/calendar-month-view.png',
+    src: '/images/kairo/v2/calendar-month-view.png',
     title: 'Calendar — Monthly View',
     bullets: [
       'Shows daily mood entries across a clean month layout',
@@ -119,7 +119,7 @@ const updatedScreens = [
     ]
   },
   {
-    src: '/images/moodly/v2/calendar-year-view.png',
+    src: '/images/kairo/v2/calendar-year-view.png',
     title: 'Calendar — Year Overview',
     bullets: [
       'Displays a full year of mood history at a glance',
@@ -129,7 +129,7 @@ const updatedScreens = [
     ]
   },
   {
-    src: '/images/moodly/v2/journal-page.png',
+    src: '/images/kairo/v2/journal-page.png',
     title: 'Journal — Log View',
     bullets: [
       'Chronological list of entries with the newest days first',
@@ -139,7 +139,7 @@ const updatedScreens = [
     ]
   },
   {
-    src: '/images/moodly/v2/journal-sort-view.png',
+    src: '/images/kairo/v2/journal-sort-view.png',
     title: 'Journal — Sort Controls',
     bullets: [
       'Expandable sorting keeps secondary controls out of the way',
@@ -149,7 +149,7 @@ const updatedScreens = [
     ]
   },
   {
-    src: '/images/moodly/v2/goals-page.png',
+    src: '/images/kairo/v2/goals-page.png',
     title: 'Goals — Progress Tracking',
     bullets: [
       'Track longer-term goals beside daily journal entries',
@@ -159,7 +159,7 @@ const updatedScreens = [
     ]
   },
   {
-    src: '/images/moodly/v2/habits-page.png',
+    src: '/images/kairo/v2/habits-page.png',
     title: 'Habits — Daily Toggles',
     bullets: [
       'Reusable habits can be enabled for daily tracking',
@@ -169,7 +169,7 @@ const updatedScreens = [
     ]
   },
   {
-    src: '/images/moodly/v2/reminders-page.png',
+    src: '/images/kairo/v2/reminders-page.png',
     title: 'Reminders — Day Notes',
     bullets: [
       'Capture gentle reminders tied to a specific calendar day',
@@ -179,7 +179,7 @@ const updatedScreens = [
     ]
   },
   {
-    src: '/images/moodly/v2/settings-view.png',
+    src: '/images/kairo/v2/settings-view.png',
     title: 'Settings — Preferences & Extensions',
     bullets: [
       'Summarizes entry count and most common mood',
@@ -197,7 +197,7 @@ const versions = [
     screens: originalScreens,
     subtitle: 'Daily mood reflection with a visual calendar heat map.',
     description:
-      'Moodly is a lightweight journaling app that makes daily reflection feel simple and visual. It centers your entries in a calendar-style heat map so you can spot trends at a glance and keep a consistent habit without friction.',
+      'Kairo is a lightweight journaling app that makes daily reflection feel simple and visual. It centers your entries in a calendar-style heat map so you can spot trends at a glance and keep a consistent habit without friction.',
     nextItems: [
       'Polish the daily flow and reduce taps',
       'Improve performance on year overview views',
@@ -211,7 +211,7 @@ const versions = [
     screens: updatedScreens,
     subtitle: 'A calmer daily reflection system for moods, habits, goals, and reminders.',
     description:
-      'Moodly is a lightweight journaling app that helps daily reflection stay simple and visual. It brings mood tracking, habit check-ins, gentle reminders, and long-term goals into one quiet system so patterns are easier to notice without adding friction.',
+      'Kairo is a lightweight journaling app that helps daily reflection stay simple and visual. It brings mood tracking, habit check-ins, gentle reminders, and long-term goals into one quiet system so patterns are easier to notice without adding friction.',
     nextItems: [
       'Tune the daily flow across moods, habits, goals, and reminders',
       'Improve performance on dense calendar and year overview views',
@@ -232,7 +232,7 @@ const pageVariants = {
 const VersionSwitcher = ({ activeVersionId }) => (
   <HStack
     as="nav"
-    aria-label="Moodly page versions"
+    aria-label="Kairo page versions"
     spacing={0}
     border="1px solid"
     borderColor="blackAlpha.200"
@@ -247,9 +247,9 @@ const VersionSwitcher = ({ activeVersionId }) => (
         <Link
           key={version.id}
           as={NextLink}
-          href={{ pathname: '/moodly', query: { version: version.id } }}
+          href={{ pathname: '/kairo', query: { version: version.id } }}
           aria-current={isActive ? 'page' : undefined}
-          aria-label={`View Moodly page version ${version.label}`}
+          aria-label={`View Kairo page version ${version.label}`}
           minW="28px"
           h="28px"
           px={2}
@@ -308,7 +308,7 @@ const ScreensGrid = ({ screens, activeVersionId, onOpenScreen }) => (
   </SimpleGrid>
 )
 
-const Moodly = () => {
+const Kairo = () => {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [activeIndex, setActiveIndex] = useState(0)
@@ -328,9 +328,9 @@ const Moodly = () => {
   return (
     <>
       <Head>
-        <title>Moodly - Maxwell Guillermo</title>
+        <title>Kairo - Maxwell Guillermo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Moodly project progress by Maxwell Guillermo" />
+        <meta name="description" content="Kairo project progress by Maxwell Guillermo" />
       </Head>
       <Box
         minH="100vh"
@@ -366,7 +366,7 @@ const Moodly = () => {
               lineHeight="1.2"
               fontFamily="sans-serif"
             >
-              Moodly
+              Kairo
             </Heading>
 
             <AnimatePresence exitBeforeEnter initial={false}>
@@ -392,7 +392,7 @@ const Moodly = () => {
                   <Box display="flex" alignItems="center" gap={3} flexWrap="wrap" color="black">
                     <Badge colorScheme="orange">In progress</Badge>
                     <Link
-                      href="https://github.com/maxiguillermo1/moodly"
+                      href="https://github.com/maxiguillermo1/kairo"
                       target="_blank"
                       textDecoration="none"
                       color="blue.600"
@@ -487,5 +487,5 @@ const Moodly = () => {
   )
 }
 
-export default Moodly
+export default Kairo
 export { getServerSideProps } from '../components/chakra'

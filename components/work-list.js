@@ -3,8 +3,8 @@ import { Box, Flex, HStack, Text, VStack, LinkBox, LinkOverlay } from '@chakra-u
 import { studioTokens } from '../lib/studio-tokens'
 import FadeIn from './fade-in'
 
-// Real, existing route is preserved for Kairo (the Moodly showcase page lives
-// at /moodly). The other rows describe in-progress systems and intentionally
+// Real, existing route is preserved for Kairo (the showcase page lives
+// at /kairo). The other rows describe in-progress systems and intentionally
 // carry no invented external links.
 const PROJECTS = [
   {
@@ -13,7 +13,7 @@ const PROJECTS = [
       'A calm personal calendar for remembering how life actually felt — mood, gently logged over time.',
     tags: ['React Native', 'Expo', 'Supabase', 'Product Design'],
     meta: '2026 · Building',
-    href: '/moodly'
+    href: '/kairo'
   },
   {
     name: 'Melody',

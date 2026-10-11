@@ -166,12 +166,11 @@ const Home = () => {
             </li>
             <li>
               Pursuing nursing, with the goal of becoming a nurse practitioner
-              and software engineer
             </li>
             <li>
-              Building <TextLink href="/moodly">Kairo</TextLink>, a calm
-              calendar for remembering how each day felt, and a personal second
-              brain with agents, memory, and workflows
+              Building <TextLink href="/kairo">Kairo</TextLink>, an app for
+              remembering how each day felt, and a personal second brain with
+              agents, memory, and workflows
             </li>
             <li>Love learning about new AI technologies and infrastructure</li>
             <li>

@@ -16,4 +16,13 @@ module.exports = {
   },
   compress: true,
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: '/moodly',
+        destination: '/kairo',
+        permanent: true
+      }
+    ]
+  }
 }
