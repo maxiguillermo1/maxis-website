@@ -155,18 +155,16 @@ const Home = () => {
           <BulletList>
             <li>Born and raised in the Bay Area</li>
             <li>
+              Childhood cancer survivor with a passion for oncology care and
+              research
+            </li>
+            <li>
               Studied Computer Science with a minor in Cybersecurity at{' '}
               <TextLink href="https://www.csulb.edu/" external>
                 CSU Long Beach
               </TextLink>
             </li>
-            <li>
-              Childhood cancer survivor with a passion for oncology care and
-              research
-            </li>
-            <li>
-              Pursuing nursing, with the goal of becoming a nurse practitioner
-            </li>
+            <li>Currently studying to become a registered nurse</li>
             <li>
               Building <TextLink href="/kairo">Kairo</TextLink>, an app for
               remembering how each day felt, and a personal second brain with
