@@ -8,7 +8,7 @@ const Gallery = () => {
   // Using generators keeps the file maintainable and matches your folder structure.
   const categories = useMemo(
     () => ({
-      me: Array.from({ length: 54 }, (_, i) => `/images_optimized/me/me${i + 1}.webp`),
+      me: Array.from({ length: 55 }, (_, i) => `/images_optimized/me/me${i + 1}.webp`),
       food: Array.from({ length: 78 }, (_, i) => `/images_optimized/food/food${i + 1}.webp`),
       nature: Array.from({ length: 32 }, (_, i) => `/images_optimized/nature/nature${i + 1}.webp`),
       misc: Array.from({ length: 5 }, (_, i) => `/images_optimized/misc/misc${i + 1}.webp`)
